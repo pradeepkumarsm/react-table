@@ -95,10 +95,10 @@ var ProductionTasks = {
 		return {
 			path: path.join(__dirname, "../../dist"),
 			publicPath: '/',
-			filename: 'react-table.js',
+			filename: 'react-grid.js',
 			pathInfo: true,
 			libraryTarget: 'umd',
-			library: 'reactTable'
+			library: 'reactGrid'
 		};
 	},
 	getDevTool: function () {
