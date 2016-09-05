@@ -1,0 +1,207 @@
+$sentinelBlue : blue;
+$sentinelHeaderText : #007cd5;
+$sentinelGridBorder : #38678f;
+$sentinelGrey : #cccccc;
+
+.nav li.active a{
+	background-color: #f5f5f5 !important;
+	font-weight: bold;
+}
+
+.tableHeaderFooterWrapper{
+	clear: both;
+}
+
+.sentinelGrid{
+	border: 1px solid $sentinelGrey;
+	padding : 0px !important;
+	width: 100%;
+	float:left;
+	.heading{
+		font-size: 14px;
+		font-weight: bold;
+		.headingText{
+			display: inline-block;
+			vertical-align: middle;
+			line-height: normal;
+			word-break: break-word;
+			color: $sentinelHeaderText;
+			float: left;
+    	}
+	}
+
+	.sentinelDataRow{
+    	display: flex;
+    	flex-wrap: wrap;
+    	margin-left: 0;
+    	margin-right: 0;
+
+    	.sentinelCol{
+
+			&:last-child{
+    			border-right-width: 0px;
+    		}
+
+			span.tbodyText{
+				display: inline-block;
+    			vertical-align: middle;
+    			line-height: normal;
+    			word-break: break-word;
+			}
+
+			&.sortingColumn{
+				display:flex;
+			 	cursor: pointer;
+
+				.keyContainer{
+					flex: 1;
+				}
+
+				.sortingIcons{
+					margin-left: 10px;
+					color: #cccccc;
+					float: left;
+					height: 20px;
+					flex: 1;
+				}
+				.sortingIcons{
+					    width: 20px;
+    					flex: initial;
+    					position: relative;
+
+    				.glyphicon{
+    					display: block;
+    				}
+
+    				.sortingIconsContainer{
+    					position: absolute;
+					    margin: auto;
+					    top: 0;
+					    bottom: 0;
+					    right: 0;
+					    left: 0;
+					    height: 30px;
+    				}
+
+					.hideElement{
+					   visibility: hidden;
+					}
+				}
+
+			}
+
+			&.sectionWrapper{
+				padding: 0px;
+
+				.sectionHeading{
+				    border-bottom: 1px solid #38678f;
+				}
+
+				.sentinelCol{
+
+					&:last-child{
+						border-right: 0px;
+					}
+				}
+			}
+    	}
+
+    	&.heading .sentinelCol{
+    		text-align: center;
+    		&:last-child{
+    			border-right-width: 0px;
+    		}
+    	}
+
+    	
+	}
+
+	.sentinelCol{
+    	flex: 1;
+		padding:0 10px;
+		word-break: break-word;
+		text-align: center;
+
+		&.removeFlex{
+			flex: initial;
+			-webkit-flex: initial;
+    		-ms-flex: initial;
+		}
+		.sectionContainer{
+			display: -webkit-flex;
+    		display: flex;
+		}
+	}
+
+	.tableDataContainer{
+		position: relative;
+	}
+
+	.totalIncidents{
+		font-weight: bold;
+		margin-left: 10px;
+	}
+
+	.evenColor{
+		background-color:white
+	}
+
+	.oddColor{
+		background-color:#DDE7EF
+	}
+
+	.gridFooter{
+		margin:15px;
+
+		#pageSize{
+			margin-left: 10px;
+		}
+	}
+
+	.noDataRow{
+		text-align:center;
+		font-weight: bold;
+		display: flex;
+    	align-items: center;
+    	justify-content: center;
+    	height:70px;
+
+	}
+
+
+
+	.evenColor , .oddColor{
+		
+	}
+	
+	.form-group{
+		margin-bottom: 0px;
+	}
+
+	.paginationContainer{
+		float: right;
+
+		.pagination{
+			display: inline-block;
+			padding-left: 15px;
+			padding-right: 15px;
+			margin:0 0 15px 0!important;
+
+			.previous, .next{
+				display: inline-block;
+			}
+
+			li.break{
+				a{
+					cursor : default;
+
+					&:hover{
+						background-color:white;
+					}
+				}
+			}
+		}
+	}
+
+
+}
