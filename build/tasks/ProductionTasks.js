@@ -17,7 +17,6 @@ var ProductionTasks = {
 			},
 			{
 				test: /\.css?$/,
-
 				loader: extract.extract('css-loader?minimize&module!postcss')
 			},
 			{
@@ -95,7 +94,7 @@ var ProductionTasks = {
 		return {
 			path: path.join(__dirname, "../../dist"),
 			publicPath: '/',
-			filename: 'react-grid.js',
+			filename: 'react-table.js',
 			pathInfo: true,
 			libraryTarget: 'umd',
 			library: 'reactGrid'

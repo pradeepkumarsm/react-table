@@ -3,6 +3,7 @@
   "version": "1.0.13",
   "description": "",
   "main": "./dist/react-table.js",
+  "style": "./dist/grid-design.css",
   "scripts": {
     "build": "export NODE_ENV='production' && webpack --progress --colors",
     "watch": "export NODE_ENV='development' && node server.js"
