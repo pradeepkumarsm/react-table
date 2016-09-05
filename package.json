@@ -1,6 +1,6 @@
 {
   "name": "react-flex-grid",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Used for sorting data, by default \"String\" type is considered for sorting",
   "main": "./dist/data-sorter.js",
   "scripts": {
