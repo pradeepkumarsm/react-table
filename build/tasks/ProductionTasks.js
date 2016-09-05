@@ -56,7 +56,7 @@ var ProductionTasks = {
 				}
 			}),
 			new webpack.optimize.DedupePlugin(),
-			new webpack.optimize.UglifyJsPlugin({
+			/*new webpack.optimize.UglifyJsPlugin({
 				minimize: true,
 				comments: false,
 				sourceMap: false,
@@ -81,12 +81,12 @@ var ProductionTasks = {
 					side_effects: true,
 					warnings: true
 				}
-			})
+			})*/
 		];
 		return plugins;
 	},
 	getEntry: function () {
-		var entry = path.join(__dirname, "../../app.js");
+		var entry = path.join(__dirname, "../../Grid/index.js");
 		return [
 			entry
 		];
