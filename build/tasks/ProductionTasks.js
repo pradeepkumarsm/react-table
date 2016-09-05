@@ -56,7 +56,7 @@ var ProductionTasks = {
 				}
 			}),
 			new webpack.optimize.DedupePlugin(),
-			/*new webpack.optimize.UglifyJsPlugin({
+			new webpack.optimize.UglifyJsPlugin({
 				minimize: true,
 				comments: false,
 				sourceMap: false,
@@ -81,7 +81,7 @@ var ProductionTasks = {
 					side_effects: true,
 					warnings: true
 				}
-			})*/
+			})
 		];
 		return plugins;
 	},
@@ -95,10 +95,10 @@ var ProductionTasks = {
 		return {
 			path: path.join(__dirname, "../../dist"),
 			publicPath: '/',
-			filename: 'react-grid.js',
+			filename: 'react-table.js',
 			pathInfo: true,
 			libraryTarget: 'umd',
-			library: 'reactGrid'
+			library: 'reactTable'
 		};
 	},
 	getDevTool: function () {
