@@ -5,8 +5,6 @@ var webpackDevMiddleware = require("webpack-dev-middleware");
 var path = require("path");
 var bodyParser = require("body-parser");
 
-var techVisit = require("./dist/server/techVisit");
-
 var app = express();
 app.use(bodyParser.json());
 
@@ -19,8 +17,6 @@ app.use(webpackDevMiddleware(compiler, {
 }));
 app.use(require("webpack-hot-middleware")(compiler));
 
-
-app.use("/techvisit", techVisit);
 
 
 app.get("/*", function(req, res) {
