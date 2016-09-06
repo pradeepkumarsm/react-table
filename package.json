@@ -1,6 +1,6 @@
 {
   "name": "react-flex-grid",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "",
   "main": "./dist/react-table.js",
   "style": "./dist/grid-design.css",
