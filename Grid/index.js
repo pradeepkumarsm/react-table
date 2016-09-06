@@ -26,9 +26,8 @@ export default class Grid extends Component {
         this.sortData = this.sortData.bind(this);
         this.setParentValue = this.setParentValue.bind(this);
         this.handlePageClick = this.handlePageClick.bind(this);
+        this.setPageSize = this.setPageSize.bind(this);
     }
-
-
 
     componentWillMount() {
         this.setState({
@@ -164,7 +163,7 @@ export default class Grid extends Component {
         return (
             <div className="pageSizeContainer pull-left">
                 <label htmlFor="pageSize">Page size: </label>
-                <select id="pageSize" ref="pages" onChange={this.setPageSize}>{options}</select>
+                <select id="pageSize" onChange={this.setPageSize}>{options}</select>
                 {(this.props.async) ?
                     <span className="totalIncidents">Total Incidents : {this.state.totalIncidents} </span> : ""}
             </div>

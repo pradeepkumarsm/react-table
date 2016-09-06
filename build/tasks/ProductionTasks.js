@@ -54,8 +54,8 @@ var ProductionTasks = {
 					'NODE_ENV': JSON.stringify('production')
 				}
 			}),
-			new webpack.optimize.DedupePlugin(),
-			new webpack.optimize.UglifyJsPlugin({
+			new webpack.optimize.DedupePlugin()
+			/*new webpack.optimize.UglifyJsPlugin({
 				minimize: true,
 				comments: false,
 				sourceMap: false,
@@ -80,7 +80,7 @@ var ProductionTasks = {
 					side_effects: true,
 					warnings: true
 				}
-			})
+			})*/
 		];
 		return plugins;
 	},
