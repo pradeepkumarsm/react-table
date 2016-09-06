@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 
-    const defaultOption = options[0]
+export default (props) => {
     return (
         <div>
             <Link to="basic"> Example1 </Link>
