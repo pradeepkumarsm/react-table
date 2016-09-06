@@ -1,17 +1,18 @@
-import React from 'react';
+import React,{Component} from 'react';
 import Template from './grid-template.js';
-import {Row, Col} from 'react-bootstrap';
 import classes from 'classnames';
 import {get} from 'lodash';
 import Sort from 'data-sorter';
 
-import 'bootstrap/dist/css/bootstrap.css';
 import gridDesign from  './grid-design.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
-const Grid = React.createClass({
 
-    getInitialState(){
-        return {
+export default class Grid extends Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
             pageNum: 0,
             showFooter: false,
             pageSize: this.props.pages[0],
@@ -21,9 +22,13 @@ const Grid = React.createClass({
             totalIncidents: 0,
             sortedOrder: {}
         };
-    },
+        this.selectedRows = {};
+        this.sortData = this.sortData.bind(this);
+        this.setParentValue = this.setParentValue.bind(this);
+        this.handlePageClick = this.handlePageClick.bind(this);
+    }
 
-    selectedRows: {},
+
 
     componentWillMount() {
         this.setState({
@@ -33,19 +38,19 @@ const Grid = React.createClass({
         });
         this.selectedRows = this.props.defaultValue;
         this.initializeTable(this.props);
-    },
+    }
 
     componentWillReceiveProps(nextProps) {
         this.initializeTable(nextProps);
-    },
+    }
 
     componentDidMount(){
         this.setParentValue();
-    },
+    }
 
     componentDidUpdate(){
         this.setParentValue();
-    },
+    }
 
     setParentValue(){
         const {selectAllRowsOnMount, parentDetails} = this.props;
@@ -54,14 +59,7 @@ const Grid = React.createClass({
             parentDetails,
             selectedRows: this.selectedRows
         } : this.selectedRows);
-    },
-
-    getDefaultProps(){
-        return {
-            pages: [25, 50, 100, 500],
-            data: []
-        }
-    },
+    }
 
     initializeTable(props){
         var gridData = props.data,
@@ -97,7 +95,7 @@ const Grid = React.createClass({
             async: async,
             totalIncidents: totalIncidents
         });
-    },
+    }
 
     rowOnChange(tbodyData, event){
         const {onChildRowSelect, onRowSelect, multiSelect, parentDetails} = this.props;
@@ -116,7 +114,7 @@ const Grid = React.createClass({
             selectedRows: this.selectedRows
         } : this.selectedRows);
         // onRowSelect && onRowSelect(this.selectedRows);
-    },
+    }
 
     showColumns(tbodyData, column, rowIndex){
         var displayData;
@@ -141,7 +139,7 @@ const Grid = React.createClass({
             displayData = Array.isArray(valueParam) ? get(tbodyData, valueParam) : tbodyData[valueParam];
             return displayData ? displayData : "-";
         }
-    },
+    }
 
     setPageSize(event){
         var newPageSize = parseInt(event.target.value);
@@ -155,7 +153,7 @@ const Grid = React.createClass({
             this.props.onPageSizeChange(newPageSize, this.state.pageNum);
         }
 
-    },
+    }
 
     getPageSize(){
         var options;
@@ -172,7 +170,7 @@ const Grid = React.createClass({
             </div>
         );
 
-    },
+    }
 
     handlePageClick(data){
         if (this.props.async) {
@@ -182,8 +180,7 @@ const Grid = React.createClass({
                 initialPosition: (data.selected * this.state.pageSize)
             })
         }
-
-    },
+    }
 
     sortData(column, key, sortKey){
         var newSort,
@@ -211,8 +208,7 @@ const Grid = React.createClass({
                 sortedOrder: sortedOrder
             });
         }
-    },
-
+    }
 
     getSortedData(sortOrder, column){
         //If column has sortKey specified then it will be considered as key for data else valueParam will be considered.
@@ -232,7 +228,7 @@ const Grid = React.createClass({
             console.log("Key is not specified for the column");
             return false;
         }
-    },
+    }
 
 
     getRow(option, tbodyData, rowIndex){
@@ -273,7 +269,7 @@ const Grid = React.createClass({
                     "removeFlex": colHeaderStyle && colHeaderStyle.width
                 });
 
-                ascClass = classes("glyphicon glyphicon-chevron-up", {
+                ascClass = classes("glyphicon" ," glyphicon-chevron-up" , {
                     [gridDesign["hideElement"]]: (sortedOrder && sortedOrder === "DSC") ? true : false
                 });
 
@@ -307,7 +303,7 @@ const Grid = React.createClass({
                             descClass = classes("glyphicon glyphicon-chevron-down", {
                                 [gridDesign["hideElement"]]: (sortedOrder && sortedOrder === "ASC") ? true : false
                             });
-                            return (<Col
+                            return (<div
                                 onClick={this.sortData.bind(null, childColumn, childKeySorting, childColumn.sortKey)}
                                 className={childColumnClass} key={childKey}>
                                 <div className={gridDesign["keyContainer"]}>
@@ -321,26 +317,26 @@ const Grid = React.createClass({
                                     </div>
                                 </div>
 
-                            </Col>)
+                            </div>)
                         } else {
-                            return (<Col className={childColumnClass} key={childKey}>
+                            return (<div className={childColumnClass} key={childKey}>
                                 <span
                                     className={gridDesign["headingText"]}>{childColumn.name ? childColumn.name : childKey} </span>
-                            </Col>)
+                            </div>)
                         }
 
 
                     });
-                    return (<Col className={columnClasses} key={key} style={colHeaderStyle}>
+                    return (<div className={columnClasses} key={key} style={colHeaderStyle}>
                         <div className={gridDesign["sectionHeading"]}>{column.sectionHeading}</div>
                         <div className={gridDesign["sectionContainer"]}>{childColumns} </div>
-                    </Col>);
+                    </div>);
                 }
 
                 else if (column.sortData && this.state.data.length) {
                     columnClasses = classes(gridDesign['cursorPointer'], gridDesign['sortingColumn'], columnClasses);
                     return (
-                        <Col onClick={this.sortData.bind(null, column, key, column.sortKey)} className={columnClasses}
+                        <div onClick={this.sortData.bind(null, column, key, column.sortKey)} className={columnClasses}
                              key={key} style={colHeaderStyle}>
                             <div className={gridDesign["keyContainer"]}>
 									<span className={gridDesign["headingText"]}>
@@ -354,10 +350,10 @@ const Grid = React.createClass({
                                 </div>
                             </div>
 
-                        </Col>);
+                        </div>);
                 } else {
-                    return <Col className={columnClasses} key={key} style={colHeaderStyle}> <span
-                        className="headingText">{column.name === undefined ? key : column.name}</span> </Col>
+                    return <div className={columnClasses} key={key} style={colHeaderStyle}> <span
+                        className="headingText">{column.name === undefined ? key : column.name}</span> </div>
                 }
             });
 
@@ -404,20 +400,20 @@ const Grid = React.createClass({
                             "removeFlex": childColumn.width
                         }, childColumn.columnClass);
 
-                        return (<Col className={childColumnClass} key={childKey}>
+                        return (<div className={childColumnClass} key={childKey}>
                             {this.showColumns(tbodyData, childColumn, rowIndex)}
-                        </Col>);
+                        </div>);
                     });
 
 
                 }
 
-                return (    <Col className={columnClasses}
+                return (    <div className={columnClasses}
                                  key={key}
                                  style={colDataStyle}>
                         {column.hasChildren ? <div className="sectionContainer"> {childColumns} </div> :
                             <span className="tbodyText">{this.showColumns(tbodyData, column, rowIndex)}</span>}
-                    </Col>
+                    </div>
                 );
 
 
@@ -425,9 +421,9 @@ const Grid = React.createClass({
         }
 
 
-        return <Row key={"grid" + rowIndex} className={rowClass} style={rowStyle}>
+        return <div key={"grid" + rowIndex} className={rowClass} style={rowStyle}>
             {optedColumns}
-            <Col md={12} className="nestedElement">
+            <div className="nestedElement">
                 {
                     (showNestedElement && showNestedElement[currentRowKey] && nestedElements && nestedElements.length) ? nestedElements.map((element) => {
                         // element.onChildRowSelect = this.onChildRowSelect.bind(null, tbodyData, element);
@@ -437,9 +433,9 @@ const Grid = React.createClass({
                         return this.props.getWidget({element, data: tbodyData});
                     }) : ""
                 }
-            </Col>
-        </Row>;
-    },
+            </div>
+        </div>;
+    }
 
     getTableBody(){
         var data = this.state.data,
@@ -484,11 +480,14 @@ const Grid = React.createClass({
                 </div>
             );
         }
-
         return outputData;
-    },
-    render: Template
-});
+    }
 
+    render = Template
+}
 
-export default Grid;
+Grid.defaultProps = {
+    pages: [25, 50, 100, 500],
+    data: [],
+    async: false
+};
