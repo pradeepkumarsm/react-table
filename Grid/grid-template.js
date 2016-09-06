@@ -32,7 +32,6 @@ const render = function(){
 										   subContainerClassName={"pages pagination"}
 										   activeClassName={"active"} />
 						</div>
-						{/*<SentinelPaginate className="pull-right paginationContainer" pageNum={this.state.pageNum} handlePageClick = {this.handlePageClick} />*/}
 					</div>
 				</div>
 			</div>
