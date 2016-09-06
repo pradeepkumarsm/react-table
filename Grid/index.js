@@ -58,7 +58,8 @@ const Grid = React.createClass({
 
     getDefaultProps(){
         return {
-            pages: [25, 50, 100, 500]
+            pages: [25, 50, 100, 500],
+            data: []
         }
     },
 
