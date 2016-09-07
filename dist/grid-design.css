@@ -7,9 +7,16 @@
 	clear: both;
 }
 
+.Grid-grid-design_show{
+	display: block;
+}
+
+.Grid-grid-design_hide{
+	display: none;
+}
+
 .Grid-grid-design_sentinelGrid{
 	border: 1px solid #cccccc;
-	padding : 0px !important;
 	width: 100%;
 	float:left;
 

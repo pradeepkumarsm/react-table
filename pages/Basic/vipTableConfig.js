@@ -15,6 +15,7 @@ export default {
             },
             "style":{
                 "columnStyle":{
+                    "width":50
                 },
                 "headerStyle":{
                 },

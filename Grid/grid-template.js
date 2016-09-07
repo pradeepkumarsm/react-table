@@ -7,7 +7,7 @@ const render = function(){
 	const {options, options:{classNames}, style:{table}} = this.props;
 
 	var gridClass = classes(gridDesign["sentinelGrid"] , (classNames && classNames.tableName)),
-		showFooter = this.state.showFooter ? 'show' : 'hide',
+		showFooter = this.state.showFooter ? gridDesign['show'] : gridDesign['hide'],
 		footerClass = classes(gridDesign["gridFooter"],showFooter);
 		
 	return (

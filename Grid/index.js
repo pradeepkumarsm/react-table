@@ -266,7 +266,7 @@ export default class Grid extends Component {
                 }
 
                 columnClasses = classes(gridDesign["sentinelCol"], column.columnClass, {
-                    "removeFlex": colHeaderStyle && colHeaderStyle.width
+                    [gridDesign["removeFlex"]]: colHeaderStyle && colHeaderStyle.width
                 });
 
                 ascClass = classes(gridDesign["sortingIcon"] , gridDesign["arrowUp"] , {
@@ -288,7 +288,7 @@ export default class Grid extends Component {
                     childColumns = childColumnNames.map((childKey, index) => {
                         childColumn = column.childColumns[childKey];
                         childColumnClass = classes(tableClassNames.tbodyColClass, gridDesign["sentinelCol"], {
-                            "removeFlex": childColumn.width
+                            [gridDesign["removeFlex"]]: childColumn.width
                         }, childColumn.columnClass);
 
                         if (childColumn.sortData && this.state.data.length) {
@@ -382,7 +382,7 @@ export default class Grid extends Component {
 
 
                 columnClasses = classes(tableClassNames.tbodyColClass, gridDesign["sentinelCol"], {
-                    "removeFlex": colDataStyle && colDataStyle.width
+                    [gridDesign["removeFlex"]]: colDataStyle && colDataStyle.width
                 }, column.columnClass);
 
                 if (column.hasChildren) {
@@ -397,7 +397,7 @@ export default class Grid extends Component {
                         columnClasses = classes(columnClasses, "sectionWrapper");
 
                         childColumnClass = classes(tableClassNames.tbodyColClass, gridDesign["sentinelCol"], {
-                            "removeFlex": childColumn.width
+                            [gridDesign["removeFlex"]]: childColumn.width
                         }, childColumn.columnClass);
 
                         return (<div className={childColumnClass} key={childKey}>
@@ -489,5 +489,15 @@ export default class Grid extends Component {
 Grid.defaultProps = {
     pages: [25, 50, 100, 500],
     data: [],
-    async: false
+    async: false,
+    style:{},
+    options: {
+        classNames: {
+            headerRowClass: "heading",
+            tbodyRowClass: "tableRow",
+            tbodyColClass: "tableCol",
+            tableName: "Flex-Grid"
+        },
+        columns: []
+    }
 };

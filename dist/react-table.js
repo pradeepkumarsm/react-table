@@ -1043,7 +1043,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
-	module.exports = {"nav":"Grid-grid-design_nav","active":"Grid-grid-design_active","tableHeaderFooterWrapper":"Grid-grid-design_tableHeaderFooterWrapper","sentinelGrid":"Grid-grid-design_sentinelGrid","heading":"Grid-grid-design_heading","headingText":"Grid-grid-design_headingText","sortingIcon":"Grid-grid-design_sortingIcon","arrowDown":"Grid-grid-design_arrowDown","sentinelDataRow":"Grid-grid-design_sentinelDataRow","sentinelCol":"Grid-grid-design_sentinelCol","tbodyText":"Grid-grid-design_tbodyText","sortingColumn":"Grid-grid-design_sortingColumn","keyContainer":"Grid-grid-design_keyContainer","sortingIcons":"Grid-grid-design_sortingIcons","glyphicon":"Grid-grid-design_glyphicon","sortingIconsContainer":"Grid-grid-design_sortingIconsContainer","hideElement":"Grid-grid-design_hideElement","sectionWrapper":"Grid-grid-design_sectionWrapper","sectionHeading":"Grid-grid-design_sectionHeading","removeFlex":"Grid-grid-design_removeFlex","sectionContainer":"Grid-grid-design_sectionContainer","tableDataContainer":"Grid-grid-design_tableDataContainer","totalIncidents":"Grid-grid-design_totalIncidents","evenColor":"Grid-grid-design_evenColor","oddColor":"Grid-grid-design_oddColor","gridFooter":"Grid-grid-design_gridFooter","pageSize":"Grid-grid-design_pageSize","noDataRow":"Grid-grid-design_noDataRow","pageSizeContainer":"Grid-grid-design_pageSizeContainer","form-group":"Grid-grid-design_form-group","paginationContainer":"Grid-grid-design_paginationContainer","pagination":"Grid-grid-design_pagination","disabled":"Grid-grid-design_disabled","pagination-lg":"Grid-grid-design_pagination-lg","pagination-sm":"Grid-grid-design_pagination-sm","previous":"Grid-grid-design_previous","next":"Grid-grid-design_next","break":"Grid-grid-design_break"};
+	module.exports = {"nav":"Grid-grid-design_nav","active":"Grid-grid-design_active","tableHeaderFooterWrapper":"Grid-grid-design_tableHeaderFooterWrapper","show":"Grid-grid-design_show","hide":"Grid-grid-design_hide","sentinelGrid":"Grid-grid-design_sentinelGrid","heading":"Grid-grid-design_heading","headingText":"Grid-grid-design_headingText","sortingIcon":"Grid-grid-design_sortingIcon","arrowDown":"Grid-grid-design_arrowDown","sentinelDataRow":"Grid-grid-design_sentinelDataRow","sentinelCol":"Grid-grid-design_sentinelCol","tbodyText":"Grid-grid-design_tbodyText","sortingColumn":"Grid-grid-design_sortingColumn","keyContainer":"Grid-grid-design_keyContainer","sortingIcons":"Grid-grid-design_sortingIcons","glyphicon":"Grid-grid-design_glyphicon","sortingIconsContainer":"Grid-grid-design_sortingIconsContainer","hideElement":"Grid-grid-design_hideElement","sectionWrapper":"Grid-grid-design_sectionWrapper","sectionHeading":"Grid-grid-design_sectionHeading","removeFlex":"Grid-grid-design_removeFlex","sectionContainer":"Grid-grid-design_sectionContainer","tableDataContainer":"Grid-grid-design_tableDataContainer","totalIncidents":"Grid-grid-design_totalIncidents","evenColor":"Grid-grid-design_evenColor","oddColor":"Grid-grid-design_oddColor","gridFooter":"Grid-grid-design_gridFooter","pageSize":"Grid-grid-design_pageSize","noDataRow":"Grid-grid-design_noDataRow","pageSizeContainer":"Grid-grid-design_pageSizeContainer","form-group":"Grid-grid-design_form-group","paginationContainer":"Grid-grid-design_paginationContainer","pagination":"Grid-grid-design_pagination","disabled":"Grid-grid-design_disabled","pagination-lg":"Grid-grid-design_pagination-lg","pagination-sm":"Grid-grid-design_pagination-sm","previous":"Grid-grid-design_previous","next":"Grid-grid-design_next","break":"Grid-grid-design_break"};
 
 /***/ },
 /* 13 */
@@ -1470,7 +1470,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 		var gridClass = (0, _classnames2.default)(_gridDesign2.default["sentinelGrid"], classNames && classNames.tableName),
-		    showFooter = this.state.showFooter ? 'show' : 'hide',
+		    showFooter = this.state.showFooter ? _gridDesign2.default['show'] : _gridDesign2.default['hide'],
 		    footerClass = (0, _classnames2.default)(_gridDesign2.default["gridFooter"], showFooter);
 
 		return _react2.default.createElement(
@@ -1887,9 +1887,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        colHeaderStyle = Object.assign({}, thStyle, _columnStyle, headerStyle);
 	                    }
 
-	                    columnClasses = (0, _classnames2.default)(_gridDesign2.default["sentinelCol"], column.columnClass, {
-	                        "removeFlex": colHeaderStyle && colHeaderStyle.width
-	                    });
+	                    columnClasses = (0, _classnames2.default)(_gridDesign2.default["sentinelCol"], column.columnClass, _defineProperty({}, _gridDesign2.default["removeFlex"], colHeaderStyle && colHeaderStyle.width));
 
 	                    ascClass = (0, _classnames2.default)(_gridDesign2.default["sortingIcon"], _gridDesign2.default["arrowUp"], _defineProperty({}, _gridDesign2.default["hideElement"], sortedOrder && sortedOrder === "DSC" ? true : false));
 
@@ -1906,9 +1904,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	                            childColumns = childColumnNames.map(function (childKey, index) {
 	                                childColumn = column.childColumns[childKey];
-	                                childColumnClass = (0, _classnames2.default)(tableClassNames.tbodyColClass, _gridDesign2.default["sentinelCol"], {
-	                                    "removeFlex": childColumn.width
-	                                }, childColumn.columnClass);
+	                                childColumnClass = (0, _classnames2.default)(tableClassNames.tbodyColClass, _gridDesign2.default["sentinelCol"], _defineProperty({}, _gridDesign2.default["removeFlex"], childColumn.width), childColumn.columnClass);
 
 	                                if (childColumn.sortData && _this2.state.data.length) {
 	                                    childColumnClass = (0, _classnames2.default)('cursorPointer sortingColumn', childColumnClass);
@@ -2046,9 +2042,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        colDataStyle = Object.assign({}, tdStyle, _columnStyle2, dataStyle);
 	                    }
 
-	                    columnClasses = (0, _classnames2.default)(tableClassNames.tbodyColClass, _gridDesign2.default["sentinelCol"], {
-	                        "removeFlex": colDataStyle && colDataStyle.width
-	                    }, column.columnClass);
+	                    columnClasses = (0, _classnames2.default)(tableClassNames.tbodyColClass, _gridDesign2.default["sentinelCol"], _defineProperty({}, _gridDesign2.default["removeFlex"], colDataStyle && colDataStyle.width), column.columnClass);
 
 	                    if (column.hasChildren) {
 	                        var childColumnNames = Object.keys(column.childColumns),
@@ -2060,9 +2054,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                            childColumn = column.childColumns[childKey];
 	                            columnClasses = (0, _classnames2.default)(columnClasses, "sectionWrapper");
 
-	                            childColumnClass = (0, _classnames2.default)(tableClassNames.tbodyColClass, _gridDesign2.default["sentinelCol"], {
-	                                "removeFlex": childColumn.width
-	                            }, childColumn.columnClass);
+	                            childColumnClass = (0, _classnames2.default)(tableClassNames.tbodyColClass, _gridDesign2.default["sentinelCol"], _defineProperty({}, _gridDesign2.default["removeFlex"], childColumn.width), childColumn.columnClass);
 
 	                            return _react2.default.createElement(
 	                                'div',
@@ -2169,7 +2161,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	Grid.defaultProps = {
 	    pages: [25, 50, 100, 500],
 	    data: [],
-	    async: false
+	    async: false,
+	    style: {},
+	    options: {
+	        classNames: {
+	            headerRowClass: "heading",
+	            tbodyRowClass: "tableRow",
+	            tbodyColClass: "tableCol",
+	            tableName: "Flex-Grid"
+	        },
+	        columns: []
+	    }
 	};
 
 /***/ },

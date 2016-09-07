@@ -12,9 +12,16 @@ $sentinelGrey : #cccccc;
 	clear: both;
 }
 
+.show{
+	display: block;
+}
+
+.hide{
+	display: none;
+}
+
 .sentinelGrid{
 	border: 1px solid $sentinelGrey;
-	padding : 0px !important;
 	width: 100%;
 	float:left;
 	.heading{
