@@ -17,7 +17,12 @@ var ProductionTasks = {
 			},
 			{
 				test: /\.css?$/,
-				loader: extract.extract('css-loader?minimize&module!postcss')
+				exclude: /(node_modules|\.raw.css?)/,
+				loader: extract.extract('css?modules&localIdentName=[path][name]_[local]!postcss')
+			},
+			{
+				test: /\.raw.css$/,
+				loader: "style-loader!css-loader!postcss-loader"
 			},
 			{
 				test: /\.(otf|eot|ttf|woff|svg|png)\??/,

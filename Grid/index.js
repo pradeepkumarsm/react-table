@@ -5,7 +5,8 @@ import {get} from 'lodash';
 import Sort from 'data-sorter';
 
 import gridDesign from  './grid-design.css';
-import 'bootstrap/dist/css/bootstrap.css';
+import './grid-design.raw.css';
+// import 'bootstrap/dist/css/bootstrap.css';
 
 
 export default class Grid extends Component {
@@ -161,7 +162,7 @@ export default class Grid extends Component {
         });
 
         return (
-            <div className="pageSizeContainer pull-left">
+            <div className={gridDesign["pageSizeContainer"]}>
                 <label htmlFor="pageSize">Page size: </label>
                 <select id="pageSize" onChange={this.setPageSize}>{options}</select>
                 {(this.props.async) ?
@@ -268,11 +269,11 @@ export default class Grid extends Component {
                     "removeFlex": colHeaderStyle && colHeaderStyle.width
                 });
 
-                ascClass = classes("glyphicon" ," glyphicon-chevron-up" , {
+                ascClass = classes(gridDesign["sortingIcon"] , gridDesign["arrowUp"] , {
                     [gridDesign["hideElement"]]: (sortedOrder && sortedOrder === "DSC") ? true : false
                 });
 
-                descClass = classes("glyphicon glyphicon-chevron-down", {
+                descClass = classes(gridDesign["sortingIcon"] ,gridDesign["arrowDown"], {
                     [gridDesign["hideElement"]]: (sortedOrder && sortedOrder === "ASC") ? true : false
                 });
 
@@ -295,11 +296,11 @@ export default class Grid extends Component {
                             childKeySorting = childKey + key;
                             sortedOrder = this.state.sortedOrder[childKeySorting];
 
-                            ascClass = classes("glyphicon glyphicon-chevron-up", {
+                            ascClass = classes(gridDesign["sortingIcon"] , gridDesign["arrowUp"] , {
                                 [gridDesign["hideElement"]]: (sortedOrder && sortedOrder === "DSC") ? true : false
                             });
 
-                            descClass = classes("glyphicon glyphicon-chevron-down", {
+                            descClass = classes(gridDesign["sortingIcon"] ,gridDesign["arrowDown"] , {
                                 [gridDesign["hideElement"]]: (sortedOrder && sortedOrder === "ASC") ? true : false
                             });
                             return (<div

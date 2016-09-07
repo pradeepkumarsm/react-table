@@ -17,19 +17,12 @@ var DevelopmentTasks = {
 			},
 			{
 				test: /\.css?$/,
-				exclude: /node_modules/,
+				exclude: /(node_modules|\.raw.css?)/,
 				loader: extract.extract('css?modules&localIdentName=[path][name]_[local]!postcss')
 			},
 			{
-				test: /\.css?$/,
-				include: /node_modules\/fk-cs-shared/,
-				loader: extract.extract('css?modules&localIdentName=[path][name]_[local]!postcss')
-			},
-			{
-				test: /\.css?$/,
-				include: /node_modules/,
-				exclude: /node_modules\/fk-cs-shared/,
-				loader: extract.extract('css?localIdentName=[path][name]_[local]!postcss')
+				test: /\.raw.css$/,
+				loader: "style-loader!css-loader!postcss-loader"
 			},
 			{
 				test: /\.(otf|eot|ttf|woff|svg|png)\??/,
