@@ -98,7 +98,7 @@ var ProductionTasks = {
 	getOutput: function () {
 		return {
 			path: path.join(__dirname, "../../dist"),
-			publicPath: '/',
+			publicPath: './',
 			filename: 'react-table.js',
 			pathInfo: true,
 			libraryTarget: 'umd',
