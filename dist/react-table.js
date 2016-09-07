@@ -2163,6 +2163,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    data: [],
 	    async: false,
 	    style: {},
+	    noData: false,
 	    options: {
 	        classNames: {
 	            headerRowClass: "heading",

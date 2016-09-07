@@ -1,10 +1,14 @@
 import React from 'react';
 import {Link} from 'react-router';
+import design from './homepage-design.css';
 
 export default (props) => {
     return (
         <div>
-            <Link to="basic"> Example1 </Link>
+            <div className={design["links"]}>
+                <Link to="basic"> Demo </Link>
+                <Link to="sorting"> Sorting </Link>
+            </div>
             {props.children}
         </div>
     )

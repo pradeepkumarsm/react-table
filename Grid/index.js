@@ -491,6 +491,7 @@ Grid.defaultProps = {
     data: [],
     async: false,
     style:{},
+    noData: false,
     options: {
         classNames: {
             headerRowClass: "heading",
