@@ -353,7 +353,7 @@ export default class Grid extends Component {
                         </div>);
                 } else {
                     return <div className={columnClasses} key={key} style={colHeaderStyle}> <span
-                        className="headingText">{column.name === undefined ? key : column.name}</span> </div>
+                        className={gridDesign["headingText"]}>{column.name === undefined ? key : column.name}</span> </div>
                 }
             });
 

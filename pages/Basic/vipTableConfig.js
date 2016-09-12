@@ -15,7 +15,6 @@ export default {
             },
             "style":{
                 "columnStyle":{
-                    "width":50
                 },
                 "headerStyle":{
                 },
@@ -150,22 +149,16 @@ export const style = {
 
     },
     "trStyle":{
-        "borderBottom":"1px solid #cccccc",
-        "padding": "10px 0"
     },
     "tBodyRowstyle":{
-        "fontSize":"13px",
-        "alignItems": "center"
 
     },
     "tHeadRowStyle":{
 
     },
     "thStyle": {
-        "textAlign": "left"
     },
     "tdStyle":{
-        "textAlign": "left"
     }
 
 };
