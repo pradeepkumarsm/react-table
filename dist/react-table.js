@@ -2009,7 +2009,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                            _react2.default.createElement(
 	                                'span',
 	                                {
-	                                    className: 'headingText' },
+	                                    className: _gridDesign2.default["headingText"] },
 	                                column.name === undefined ? key : column.name
 	                            ),
 	                            ' '
