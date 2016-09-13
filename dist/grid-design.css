@@ -19,8 +19,6 @@
 	border: 1px solid #eaeaea;
 	width: 100%;
 	float:left;
-
-
 }
 
 .Grid-grid-design_sentinelGrid .Grid-grid-design_heading{
@@ -28,7 +26,6 @@
 	font-weight: 400;
 	background: #f5f5f5;
 	color: #717171;
-	line-height: 50px;
 }
 
 .Grid-grid-design_sentinelGrid .Grid-grid-design_heading .Grid-grid-design_headingText{
@@ -217,94 +214,6 @@
 
 .Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer{
 	float: right;
-}
-
-.Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination {
-	display: inline-block;
-	padding-left: 0;
-	margin: 20px 0;
-	border-radius: 4px;
-}
-
-.Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination > li {
-	display: inline;
-}
-
-.Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination > li > a, .Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination > li > span {
-	position: relative;
-	float: left;
-	padding: 6px 12px;
-	margin-left: -1px;
-	line-height: 1.42857143;
-	color: #337ab7;
-	text-decoration: none;
-	background-color: #fff;
-	border: 1px solid #ddd;
-}
-
-.Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination > li:first-child > a, .Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination > li:first-child > span {
-	margin-left: 0;
-	border-top-left-radius: 4px;
-	border-bottom-left-radius: 4px;
-}
-
-.Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination > li:last-child > a, .Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination > li:last-child > span {
-	border-top-right-radius: 4px;
-	border-bottom-right-radius: 4px;
-}
-
-.Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination > li > a:hover, .Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination > li > span:hover, .Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination > li > a:focus, .Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination > li > span:focus {
-	z-index: 2;
-	color: #23527c;
-	background-color: #eee;
-	border-color: #ddd;
-}
-
-.Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination > .Grid-grid-design_active > a, .Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination > .Grid-grid-design_active > span, .Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination > .Grid-grid-design_active > a:hover, .Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination > .Grid-grid-design_active > span:hover, .Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination > .Grid-grid-design_active > a:focus, .Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination > .Grid-grid-design_active > span:focus {
-	z-index: 3;
-	color: #fff;
-	cursor: default;
-	background-color: #337ab7;
-	border-color: #337ab7;
-}
-
-.Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination > .Grid-grid-design_disabled > span, .Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination > .Grid-grid-design_disabled > span:hover, .Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination > .Grid-grid-design_disabled > span:focus, .Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination > .Grid-grid-design_disabled > a, .Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination > .Grid-grid-design_disabled > a:hover, .Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination > .Grid-grid-design_disabled > a:focus {
-	color: #777;
-	cursor: not-allowed;
-	background-color: #fff;
-	border-color: #ddd;
-}
-
-.Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination-lg > li > a, .Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination-lg > li > span {
-	padding: 10px 16px;
-	font-size: 18px;
-	line-height: 1.3333333;
-}
-
-.Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination-lg > li:first-child > a, .Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination-lg > li:first-child > span {
-	border-top-left-radius: 6px;
-	border-bottom-left-radius: 6px;
-}
-
-.Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination-lg > li:last-child > a, .Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination-lg > li:last-child > span {
-	border-top-right-radius: 6px;
-	border-bottom-right-radius: 6px;
-}
-
-.Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination-sm > li > a, .Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination-sm > li > span {
-	padding: 5px 10px;
-	font-size: 12px;
-	line-height: 1.5;
-}
-
-.Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination-sm > li:first-child > a, .Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination-sm > li:first-child > span {
-	border-top-left-radius: 3px;
-	border-bottom-left-radius: 3px;
-}
-
-.Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination-sm > li:last-child > a, .Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination-sm > li:last-child > span {
-	border-top-right-radius: 3px;
-	border-bottom-right-radius: 3px;
 }
 
 .Grid-grid-design_sentinelGrid .Grid-grid-design_paginationContainer .Grid-grid-design_pagination{
