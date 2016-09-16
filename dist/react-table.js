@@ -1708,26 +1708,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	            if (valueParam === 'serialNo') {
 	                return ++rowIndex + this.state.initialPosition;
 	            } else if (column.widget) {
-	                if (column.widget === "checkbox") {
-	                    var _props3 = this.props;
-	                    var defaultValue = _props3.defaultValue;
-	                    var keyForRowSelect = _props3.keyForRowSelect;
-
-	                    var checked = defaultValue && defaultValue[tbodyData[keyForRowSelect]] ? true : false;
-	                    var details = {
-	                        element: column,
-	                        data: tbodyData,
-	                        onClick: this.rowOnChange.bind(null, tbodyData),
-	                        checked: checked
-	                    };
-
-	                    displayData = this.props.getWidget(details);
-	                    return displayData ? displayData : "-";
-	                } else {
-	                    var _details = { element: column, data: tbodyData };
-	                    displayData = this.props.getWidget(_details);
-	                    return displayData ? displayData : "-";
-	                }
+	                var details = { element: column, data: tbodyData, parentProperties: this.props, rowOnChange: this.rowOnChange };
+	                displayData = this.props.getWidget(details);
+	                return displayData ? displayData : "-";
 	            } else {
 	                displayData = Array.isArray(valueParam) ? (0, _lodash.get)(tbodyData, valueParam) : tbodyData[valueParam];
 	                return displayData ? displayData : "-";
@@ -1845,21 +1828,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	        value: function getRow(option, tbodyData, rowIndex) {
 	            var _this2 = this;
 
-	            var _props4 = this.props;
-	            var selectAllRowsOnMount = _props4.selectAllRowsOnMount;
-	            var getRowStyle = _props4.getRowStyle;
-	            var showNestedElement = _props4.showNestedElement;
-	            var keyForRowSelect = _props4.keyForRowSelect;
-	            var options = _props4.options;
-	            var _props4$options = _props4.options;
-	            var columns = _props4$options.columns;
-	            var nestedElements = _props4$options.nestedElements;
-	            var _props4$style = _props4.style;
-	            var tHeadRowStyle = _props4$style.tHeadRowStyle;
-	            var tBodyRowstyle = _props4$style.tBodyRowstyle;
-	            var tdStyle = _props4$style.tdStyle;
-	            var thStyle = _props4$style.thStyle;
-	            var trStyle = _props4$style.trStyle;
+	            var _props3 = this.props;
+	            var selectAllRowsOnMount = _props3.selectAllRowsOnMount;
+	            var getRowStyle = _props3.getRowStyle;
+	            var showNestedElement = _props3.showNestedElement;
+	            var keyForRowSelect = _props3.keyForRowSelect;
+	            var options = _props3.options;
+	            var _props3$options = _props3.options;
+	            var columns = _props3$options.columns;
+	            var nestedElements = _props3$options.nestedElements;
+	            var _props3$style = _props3.style;
+	            var tHeadRowStyle = _props3$style.tHeadRowStyle;
+	            var tBodyRowstyle = _props3$style.tBodyRowstyle;
+	            var tdStyle = _props3$style.tdStyle;
+	            var thStyle = _props3$style.thStyle;
+	            var trStyle = _props3$style.trStyle;
 
 
 	            var tableClassNames = options.classNames ? options.classNames : {},
@@ -2099,9 +2082,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    showNestedElement && showNestedElement[currentRowKey] && nestedElements && nestedElements.length ? nestedElements.map(function (element) {
 	                        // element.onChildRowSelect = this.onChildRowSelect.bind(null, tbodyData, element);
 	                        //Passing Required Parent Properties to its children
-	                        var _props5 = _this2.props;
-	                        var keyForRowSelect = _props5.keyForRowSelect;
-	                        var outputKey = _props5.outputKey;
+	                        var _props4 = _this2.props;
+	                        var keyForRowSelect = _props4.keyForRowSelect;
+	                        var outputKey = _props4.outputKey;
 
 	                        element.parentDetails = { data: tbodyData, properties: { keyForRowSelect: keyForRowSelect, outputKey: outputKey } };
 	                        return _this2.props.getWidget({ element: element, data: tbodyData });

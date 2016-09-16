@@ -123,23 +123,9 @@ export default class Grid extends Component {
         if (valueParam === 'serialNo') {
             return ++rowIndex + this.state.initialPosition;
         } else if (column.widget) {
-            if (column.widget === "checkbox") {
-                const {defaultValue, keyForRowSelect} = this.props;
-                const checked = defaultValue && defaultValue[tbodyData[keyForRowSelect]] ? true : false;
-                const details = {
-                    element: column,
-                    data: tbodyData,
-                    onClick: this.rowOnChange.bind(null, tbodyData),
-                    checked: checked
-                };
-
-                displayData = this.props.getWidget(details);
-                return displayData ? displayData : "-";
-            } else {
-                const details = {element: column, data: tbodyData};
-                displayData = this.props.getWidget(details);
-                return displayData ? displayData : "-";
-            }
+            const details = {element : column, data : tbodyData, parentProperties: this.props, rowOnChange: this.rowOnChange};
+            displayData = this.props.getWidget(details);
+            return displayData ? displayData : "-";
         } else {
             displayData = Array.isArray(valueParam) ? get(tbodyData, valueParam) : tbodyData[valueParam];
             return displayData ? displayData : "-";
