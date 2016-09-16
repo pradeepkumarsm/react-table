@@ -28,6 +28,7 @@ export default class Grid extends Component {
         this.setParentValue = this.setParentValue.bind(this);
         this.handlePageClick = this.handlePageClick.bind(this);
         this.setPageSize = this.setPageSize.bind(this);
+        this.rowOnChange = this.rowOnChange.bind(this);
     }
 
     componentWillMount() {
@@ -125,11 +126,15 @@ export default class Grid extends Component {
             if (column.widget === "checkbox") {
                 const {defaultValue, keyForRowSelect} = this.props;
                 const checked = defaultValue && defaultValue[tbodyData[keyForRowSelect]] ? true : false;
-                return <Checkbox
-                    label=""
-                    onCheck={this.rowOnChange.bind(null, tbodyData)}
-                    name={"tableRow" + valueParam}
-                    checked={checked}/>
+                const details = {
+                    element: column,
+                    data: tbodyData,
+                    onClick: this.rowOnChange.bind(null, tbodyData),
+                    checked: checked
+                };
+
+                displayData = this.props.getWidget(details);
+                return displayData ? displayData : "-";
             } else {
                 const details = {element: column, data: tbodyData};
                 displayData = this.props.getWidget(details);

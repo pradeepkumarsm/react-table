@@ -1595,6 +1595,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _this.setParentValue = _this.setParentValue.bind(_this);
 	        _this.handlePageClick = _this.handlePageClick.bind(_this);
 	        _this.setPageSize = _this.setPageSize.bind(_this);
+	        _this.rowOnChange = _this.rowOnChange.bind(_this);
 	        return _this;
 	    }
 
@@ -1713,14 +1714,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    var keyForRowSelect = _props3.keyForRowSelect;
 
 	                    var checked = defaultValue && defaultValue[tbodyData[keyForRowSelect]] ? true : false;
-	                    return _react2.default.createElement(Checkbox, {
-	                        label: '',
-	                        onCheck: this.rowOnChange.bind(null, tbodyData),
-	                        name: "tableRow" + valueParam,
-	                        checked: checked });
-	                } else {
-	                    var details = { element: column, data: tbodyData };
+	                    var details = {
+	                        element: column,
+	                        data: tbodyData,
+	                        onClick: this.rowOnChange.bind(null, tbodyData),
+	                        checked: checked
+	                    };
+
 	                    displayData = this.props.getWidget(details);
+	                    return displayData ? displayData : "-";
+	                } else {
+	                    var _details = { element: column, data: tbodyData };
+	                    displayData = this.props.getWidget(_details);
 	                    return displayData ? displayData : "-";
 	                }
 	            } else {
