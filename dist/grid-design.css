@@ -32,6 +32,10 @@
 	word-break: break-word;
 }
 
+.Grid-grid-design_sentinelGrid .Grid-grid-design_nestedElement{
+	width: 100%;
+}
+
 .Grid-grid-design_sentinelGrid .Grid-grid-design_sortingIcon{
 	background: url(./arrows-1f7d00fc.png);
 	height: 10px;

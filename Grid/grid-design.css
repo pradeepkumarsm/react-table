@@ -36,6 +36,10 @@ $headingText: #717171;
     	}
 	}
 
+	.nestedElement{
+		width: 100%;
+	}
+
 	.sortingIcon{
 		background: url('../images/arrows.png');
 		height: 10px;
