@@ -414,7 +414,7 @@ export default class Grid extends Component {
 
         return <div key={"grid" + rowIndex} className={rowClass} style={rowStyle}>
             {optedColumns}
-            <div className="nestedElement">
+            <div className={gridDesign["nestedElement"]}>
                 {
                     (showNestedElement && showNestedElement[currentRowKey] && nestedElements && nestedElements.length) ? nestedElements.map((element) => {
                         // element.onChildRowSelect = this.onChildRowSelect.bind(null, tbodyData, element);

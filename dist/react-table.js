@@ -2078,7 +2078,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                optedColumns,
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: 'nestedElement' },
+	                    { className: _gridDesign2.default["nestedElement"] },
 	                    showNestedElement && showNestedElement[currentRowKey] && nestedElements && nestedElements.length ? nestedElements.map(function (element) {
 	                        // element.onChildRowSelect = this.onChildRowSelect.bind(null, tbodyData, element);
 	                        //Passing Required Parent Properties to its children
