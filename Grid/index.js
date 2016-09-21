@@ -246,14 +246,14 @@ export default class Grid extends Component {
 
             optedColumns = columns.map((column, index)=> {
                 let result,
-                    colHeaderStyle = {},
+                    colHeaderStyle = thStyle ? thStyle : {},
                     key = column.id,
                     sortedOrder = this.state.sortedOrder[key];
 
 
                 if (column.style) {
                     const {columnStyle, headerStyle} = column.style;
-                    colHeaderStyle = Object.assign({}, thStyle, columnStyle, headerStyle);
+                    colHeaderStyle = Object.assign({}, colHeaderStyle, columnStyle, headerStyle);
                 }
 
                 columnClasses = classes(gridDesign["sentinelCol"], column.columnClass, {
@@ -301,8 +301,8 @@ export default class Grid extends Component {
                                     <span
                                         className={gridDesign["headingText"]}>{childColumn.name ? childColumn.name : childKey} </span>
                                 </div>
-                                <div className="sortingIcons">
-                                    <div className="sortingIconsContainer">
+                                <div className={gridDesign["sortingIcons"]}>
+                                    <div className={gridDesign["sortingIconsContainer"]}>
                                         <div className={ascClass}></div>
                                         <div className={descClass}></div>
                                     </div>

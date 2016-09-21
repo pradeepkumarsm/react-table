@@ -15,6 +15,10 @@
 	display: none;
 }
 
+.Grid-grid-design_nestedElement{
+	width: 100%;
+}
+
 .Grid-grid-design_sentinelGrid{
 	border: 1px solid #eaeaea;
 	width: 100%;
@@ -30,10 +34,6 @@
 
 .Grid-grid-design_sentinelGrid .Grid-grid-design_heading .Grid-grid-design_headingText{
 	word-break: break-word;
-}
-
-.Grid-grid-design_sentinelGrid .Grid-grid-design_nestedElement{
-	width: 100%;
 }
 
 .Grid-grid-design_sentinelGrid .Grid-grid-design_sortingIcon{
@@ -167,7 +167,7 @@
 
 .Grid-grid-design_sentinelGrid .Grid-grid-design_tableDataContainer{
 	position: relative;
-	border-bottom: 1px solid #ccc;
+	/*border-bottom: 1px solid $sentinelGridBorder;*/
 }
 
 .Grid-grid-design_sentinelGrid .Grid-grid-design_totalIncidents{

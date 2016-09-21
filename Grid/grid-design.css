@@ -22,6 +22,10 @@ $headingText: #717171;
 	display: none;
 }
 
+.nestedElement{
+	width: 100%;
+}
+
 .sentinelGrid{
 	border: 1px solid $sentinelGrey;
 	width: 100%;
@@ -34,10 +38,6 @@ $headingText: #717171;
 		.headingText{
 			word-break: break-word;
     	}
-	}
-
-	.nestedElement{
-		width: 100%;
 	}
 
 	.sortingIcon{
@@ -160,7 +160,7 @@ $headingText: #717171;
 
 	.tableDataContainer{
 		position: relative;
-		border-bottom: 1px solid $sentinelGridBorder;
+		/*border-bottom: 1px solid $sentinelGridBorder;*/
 	}
 
 	.totalIncidents{
