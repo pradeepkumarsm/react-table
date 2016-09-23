@@ -125,9 +125,13 @@ export default class Grid extends Component {
         } else if (column.widget) {
             const details = {element : column, data : tbodyData, parentProperties: this.props, rowOnChange: this.rowOnChange};
             displayData = this.props.getWidget(details);
+            if(typeof(displayData) === "number")
+                return displayData;
             return displayData ? displayData : "-";
         } else {
             displayData = Array.isArray(valueParam) ? get(tbodyData, valueParam) : tbodyData[valueParam];
+            if(typeof(displayData) === "number")
+                return displayData;
             return displayData ? displayData : "-";
         }
     }

@@ -11,7 +11,7 @@ const render = function(){
 		footerClass = classes(gridDesign["gridFooter"],showFooter);
 		
 	return (
-			<div className={gridClass} style = {table}>
+			<div ref={this.props.ref} className={gridClass} style = {table}>
 				{this.props.getAdditionalRows ? this.props.getAdditionalRows() : ""}			
 				<div className={gridDesign["tableHeaderFooterWrapper"]}>
 					{this.getRow("header")}

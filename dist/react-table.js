@@ -1475,7 +1475,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 		return _react2.default.createElement(
 			'div',
-			{ className: gridClass, style: table },
+			{ ref: this.props.ref, className: gridClass, style: table },
 			this.props.getAdditionalRows ? this.props.getAdditionalRows() : "",
 			_react2.default.createElement(
 				'div',
@@ -1710,9 +1710,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	            } else if (column.widget) {
 	                var details = { element: column, data: tbodyData, parentProperties: this.props, rowOnChange: this.rowOnChange };
 	                displayData = this.props.getWidget(details);
+	                if (typeof displayData === "number") return displayData;
 	                return displayData ? displayData : "-";
 	            } else {
 	                displayData = Array.isArray(valueParam) ? (0, _lodash.get)(tbodyData, valueParam) : tbodyData[valueParam];
+	                if (typeof displayData === "number") return displayData;
 	                return displayData ? displayData : "-";
 	            }
 	        }
