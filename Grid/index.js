@@ -130,7 +130,7 @@ export default class Grid extends Component {
                     return displayData;
                 return displayData ? displayData : "-";
             }else{
-                return column.widget;
+                return React.createElement(column.widget, {...details}, null);
             }
 
         } else {
