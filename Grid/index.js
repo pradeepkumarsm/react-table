@@ -123,11 +123,16 @@ export default class Grid extends Component {
         if (valueParam === 'serialNo') {
             return ++rowIndex + this.state.initialPosition;
         } else if (column.widget) {
-            const details = {element : column, data : tbodyData, parentProperties: this.props, rowOnChange: this.rowOnChange};
-            displayData = this.props.getWidget(details);
-            if(typeof(displayData) === "number")
-                return displayData;
-            return displayData ? displayData : "-";
+            if(typeof(column.widget) === "string"){
+                const details = {element : column, data : tbodyData, parentProperties: this.props, rowOnChange: this.rowOnChange};
+                displayData = this.props.getWidget(details);
+                if(typeof(displayData) === "number")
+                    return displayData;
+                return displayData ? displayData : "-";
+            }else{
+                return column.widget;
+            }
+
         } else {
             displayData = Array.isArray(valueParam) ? get(tbodyData, valueParam) : tbodyData[valueParam];
             if(typeof(displayData) === "number")
