@@ -8,6 +8,7 @@ export default (props) => {
             <div className={design["links"]}>
                 <Link to="basic"> Demo </Link>
                 <Link to="sorting"> Sorting </Link>
+                <Link to="nested"> Nested Table </Link>
             </div>
             {props.children}
         </div>

@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React, {Component} from 'react';
 import Template from './grid-template.js';
 import classes from 'classnames';
 import {get} from 'lodash';
@@ -11,7 +11,7 @@ import './grid-design.raw.css';
 
 export default class Grid extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             pageNum: 0,
@@ -45,15 +45,15 @@ export default class Grid extends Component {
         this.initializeTable(nextProps);
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.setParentValue();
     }
 
-    componentDidUpdate(){
+    componentDidUpdate() {
         this.setParentValue();
     }
 
-    setParentValue(){
+    setParentValue() {
         const {selectAllRowsOnMount, parentDetails} = this.props;
 
         selectAllRowsOnMount && selectAllRowsOnMount(parentDetails ? {
@@ -62,7 +62,7 @@ export default class Grid extends Component {
         } : this.selectedRows);
     }
 
-    initializeTable(props){
+    initializeTable(props) {
         var gridData = props.data,
             gridLength = gridData.length,
             async = props.async,
@@ -98,7 +98,7 @@ export default class Grid extends Component {
         });
     }
 
-    rowOnChange(tbodyData, event){
+    rowOnChange(tbodyData, event) {
         const {onChildRowSelect, onRowSelect, multiSelect, parentDetails} = this.props;
 
         const multiSelectRows = (multiSelect !== undefined) ? multiSelect : true;
@@ -117,31 +117,36 @@ export default class Grid extends Component {
         // onRowSelect && onRowSelect(this.selectedRows);
     }
 
-    showColumns(tbodyData, column, rowIndex){
+    showColumns(tbodyData, column, rowIndex) {
         var displayData;
         const {valueParam} = column.options;
         if (valueParam === 'serialNo') {
             return ++rowIndex + this.state.initialPosition;
         } else if (column.widget) {
-            const details = {element : column, data : tbodyData, parentProperties: this.props, rowOnChange: this.rowOnChange};
-            if(typeof(column.widget) === "string"){
+            const details = {
+                element: column,
+                data: tbodyData,
+                parentProperties: this.props,
+                rowOnChange: this.rowOnChange
+            };
+            if (typeof(column.widget) === "string") {
                 displayData = this.props.getWidget(details);
-                if(typeof(displayData) === "number")
+                if (typeof(displayData) === "number")
                     return displayData;
                 return displayData ? displayData : "-";
-            }else{
+            } else {
                 return React.createElement(column.widget, {...details}, null);
             }
 
         } else {
             displayData = Array.isArray(valueParam) ? get(tbodyData, valueParam) : tbodyData[valueParam];
-            if(typeof(displayData) === "number")
+            if (typeof(displayData) === "number")
                 return displayData;
             return displayData ? displayData : "-";
         }
     }
 
-    setPageSize(event){
+    setPageSize(event) {
         var newPageSize = parseInt(event.target.value);
         this.setState({
             pageSize: newPageSize,
@@ -155,7 +160,7 @@ export default class Grid extends Component {
 
     }
 
-    getPageSize(){
+    getPageSize() {
         var options;
         options = this.props.pages.map(function (key, index) {
             return <option value={key} key={index}>{key}</option>
@@ -172,7 +177,7 @@ export default class Grid extends Component {
 
     }
 
-    handlePageClick(data){
+    handlePageClick(data) {
         if (this.props.async) {
             this.props.onPageChange(++data.selected);
         } else {
@@ -182,7 +187,7 @@ export default class Grid extends Component {
         }
     }
 
-    sortData(column, key, sortKey){
+    sortData(column, key, sortKey) {
         var newSort,
             sortingSuccessful = false,
             sortedOrder = this.state.sortedOrder,
@@ -210,7 +215,7 @@ export default class Grid extends Component {
         }
     }
 
-    getSortedData(sortOrder, column){
+    getSortedData(sortOrder, column) {
         //If column has sortKey specified then it will be considered as key for data else valueParam will be considered.
         const sortKey = column.options && (column.options.sortingKey || column.options.valueParam);
         if (sortKey) {
@@ -231,8 +236,8 @@ export default class Grid extends Component {
     }
 
 
-    getRow(option, tbodyData, rowIndex){
-        const {selectAllRowsOnMount, getRowStyle, showNestedElement, keyForRowSelect, options, options : {columns, nestedElements}, style:{tHeadRowStyle, tBodyRowstyle, tdStyle, thStyle, trStyle}} = this.props;
+    getRow(option, tbodyData, rowIndex) {
+        const {selectAllRowsOnMount, getRowStyle, showNestedElement, keyForRowSelect, options, options : {columns, nestedElements}, style:{tHeadRowStyle, nestedElementStyle, tBodyRowstyle, tdStyle, thStyle, trStyle}} = this.props;
 
         var tableClassNames = options.classNames ? options.classNames : {},
             column,
@@ -269,11 +274,11 @@ export default class Grid extends Component {
                     [gridDesign["removeFlex"]]: colHeaderStyle && colHeaderStyle.width
                 });
 
-                ascClass = classes(gridDesign["sortingIcon"] , gridDesign["arrowUp"] , {
+                ascClass = classes(gridDesign["sortingIcon"], gridDesign["arrowUp"], {
                     [gridDesign["hideElement"]]: (sortedOrder && sortedOrder === "DSC") ? true : false
                 });
 
-                descClass = classes(gridDesign["sortingIcon"] ,gridDesign["arrowDown"], {
+                descClass = classes(gridDesign["sortingIcon"], gridDesign["arrowDown"], {
                     [gridDesign["hideElement"]]: (sortedOrder && sortedOrder === "ASC") ? true : false
                 });
 
@@ -296,11 +301,11 @@ export default class Grid extends Component {
                             childKeySorting = childKey + key;
                             sortedOrder = this.state.sortedOrder[childKeySorting];
 
-                            ascClass = classes(gridDesign["sortingIcon"] , gridDesign["arrowUp"] , {
+                            ascClass = classes(gridDesign["sortingIcon"], gridDesign["arrowUp"], {
                                 [gridDesign["hideElement"]]: (sortedOrder && sortedOrder === "DSC") ? true : false
                             });
 
-                            descClass = classes(gridDesign["sortingIcon"] ,gridDesign["arrowDown"] , {
+                            descClass = classes(gridDesign["sortingIcon"], gridDesign["arrowDown"], {
                                 [gridDesign["hideElement"]]: (sortedOrder && sortedOrder === "ASC") ? true : false
                             });
                             return (<div
@@ -353,7 +358,8 @@ export default class Grid extends Component {
                         </div>);
                 } else {
                     return <div className={columnClasses} key={key} style={colHeaderStyle}> <span
-                        className={gridDesign["headingText"]}>{column.name === undefined ? key : column.name}</span> </div>
+                        className={gridDesign["headingText"]}>{column.name === undefined ? key : column.name}</span>
+                    </div>
                 }
             });
 
@@ -423,21 +429,33 @@ export default class Grid extends Component {
 
         return <div key={"grid" + rowIndex} className={rowClass} style={rowStyle}>
             {optedColumns}
-            <div className={gridDesign["nestedElement"]}>
                 {
                     (showNestedElement && showNestedElement[currentRowKey] && nestedElements && nestedElements.length) ? nestedElements.map((element) => {
                         // element.onChildRowSelect = this.onChildRowSelect.bind(null, tbodyData, element);
                         //Passing Required Parent Properties to its children
                         const {keyForRowSelect, outputKey} = this.props;
                         element.parentDetails = {data: tbodyData, properties: {keyForRowSelect, outputKey}};
-                        return this.props.getWidget({element, data: tbodyData});
+
+                        let renderNestedElement;
+
+                        if (typeof(element.widget) === "string") {
+                            renderNestedElement =  this.props.getWidget({...element, data: tbodyData});
+                        } else {
+                            renderNestedElement =  React.createElement(element.widget, {...element, data: tbodyData}, null);
+                        }
+
+                        return (
+                            <div style={nestedElementStyle} className={gridDesign["nestedElement"]}>
+                                {renderNestedElement}
+                            </div>
+                        )
+
                     }) : ""
                 }
-            </div>
         </div>;
     }
 
-    getTableBody(){
+    getTableBody() {
         var data = this.state.data,
             noData = this.state.noData,
             async = this.props.async,
@@ -490,7 +508,7 @@ Grid.defaultProps = {
     pages: [25, 50, 100, 500],
     data: [],
     async: false,
-    style:{},
+    style: {},
     noData: false,
     options: {
         classNames: {
