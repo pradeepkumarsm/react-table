@@ -108,7 +108,7 @@ export default (props) => {
             <Grid
                 options={tableConfig}
                 keyForRowSelect = {"ipAddress"}//Consider unique column key
-                showNestedElement = {{"192.168.1.3": true}}
+                showNestedElement = {{"192.168.1.3": true,"192.168.1.1":true}}
                 getWidget = {getWidget}
                 style={tableStyle}
                 data={tableData}/>

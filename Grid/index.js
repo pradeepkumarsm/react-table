@@ -74,10 +74,10 @@ export default class Grid extends Component {
         this.selectedRows = props.defaultValue;
 
         if (async) {
-            currentPageNum = Math.ceil(gridData.count / this.state.pageSize);
+            currentPageNum = Math.ceil(props.count / this.state.pageSize);
             pagination = currentPageNum ? true : false;
-            paginatedData = gridData.data ? gridData.data : [];
-            totalIncidents = gridData.count;
+            paginatedData = gridData ? gridData : [];
+            totalIncidents = props.count;
         } else {
             if (gridLength && (gridLength > this.state.pageSize)) {
                 currentPageNum = Math.ceil(gridLength / this.state.pageSize);
@@ -178,8 +178,9 @@ export default class Grid extends Component {
     }
 
     handlePageClick(data) {
+        const {onPageChange} = this.props;
         if (this.props.async) {
-            this.props.onPageChange(++data.selected);
+            onPageChange && onPageChange(++data.selected);
         } else {
             this.setState({
                 initialPosition: (data.selected * this.state.pageSize)
@@ -508,6 +509,7 @@ Grid.defaultProps = {
     pages: [25, 50, 100, 500],
     data: [],
     async: false,
+    count: 0,
     style: {},
     noData: false,
     options: {

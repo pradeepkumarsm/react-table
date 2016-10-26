@@ -1654,10 +1654,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	            this.selectedRows = props.defaultValue;
 
 	            if (async) {
-	                currentPageNum = Math.ceil(gridData.count / this.state.pageSize);
+	                currentPageNum = Math.ceil(props.count / this.state.pageSize);
 	                pagination = currentPageNum ? true : false;
-	                paginatedData = gridData.data ? gridData.data : [];
-	                totalIncidents = gridData.count;
+	                paginatedData = gridData ? gridData : [];
+	                totalIncidents = props.count;
 	            } else {
 	                if (gridLength && gridLength > this.state.pageSize) {
 	                    currentPageNum = Math.ceil(gridLength / this.state.pageSize);
@@ -1710,7 +1710,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	            if (valueParam === 'serialNo') {
 	                return ++rowIndex + this.state.initialPosition;
 	            } else if (column.widget) {
-	                var details = { element: column, data: tbodyData, parentProperties: this.props, rowOnChange: this.rowOnChange };
+	                var details = {
+	                    element: column,
+	                    data: tbodyData,
+	                    parentProperties: this.props,
+	                    rowOnChange: this.rowOnChange
+	                };
 	                if (typeof column.widget === "string") {
 	                    displayData = this.props.getWidget(details);
 	                    if (typeof displayData === "number") return displayData;
@@ -1775,8 +1780,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: 'handlePageClick',
 	        value: function handlePageClick(data) {
+	            var onPageChange = this.props.onPageChange;
+
 	            if (this.props.async) {
-	                this.props.onPageChange(++data.selected);
+	                onPageChange && onPageChange(++data.selected);
 	            } else {
 	                this.setState({
 	                    initialPosition: data.selected * this.state.pageSize
@@ -1847,6 +1854,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var nestedElements = _props3$options.nestedElements;
 	            var _props3$style = _props3.style;
 	            var tHeadRowStyle = _props3$style.tHeadRowStyle;
+	            var nestedElementStyle = _props3$style.nestedElementStyle;
 	            var tBodyRowstyle = _props3$style.tBodyRowstyle;
 	            var tdStyle = _props3$style.tdStyle;
 	            var thStyle = _props3$style.thStyle;
@@ -2007,8 +2015,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                {
 	                                    className: _gridDesign2.default["headingText"] },
 	                                column.name === undefined ? key : column.name
-	                            ),
-	                            ' '
+	                            )
 	                        );
 	                    }
 	                });
@@ -2084,20 +2091,29 @@ return /******/ (function(modules) { // webpackBootstrap
 	                'div',
 	                { key: "grid" + rowIndex, className: rowClass, style: rowStyle },
 	                optedColumns,
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: _gridDesign2.default["nestedElement"] },
-	                    showNestedElement && showNestedElement[currentRowKey] && nestedElements && nestedElements.length ? nestedElements.map(function (element) {
-	                        // element.onChildRowSelect = this.onChildRowSelect.bind(null, tbodyData, element);
-	                        //Passing Required Parent Properties to its children
-	                        var _props4 = _this2.props;
-	                        var keyForRowSelect = _props4.keyForRowSelect;
-	                        var outputKey = _props4.outputKey;
+	                showNestedElement && showNestedElement[currentRowKey] && nestedElements && nestedElements.length ? nestedElements.map(function (element) {
+	                    // element.onChildRowSelect = this.onChildRowSelect.bind(null, tbodyData, element);
+	                    //Passing Required Parent Properties to its children
+	                    var _props4 = _this2.props;
+	                    var keyForRowSelect = _props4.keyForRowSelect;
+	                    var outputKey = _props4.outputKey;
 
-	                        element.parentDetails = { data: tbodyData, properties: { keyForRowSelect: keyForRowSelect, outputKey: outputKey } };
-	                        return _this2.props.getWidget({ element: element, data: tbodyData });
-	                    }) : ""
-	                )
+	                    element.parentDetails = { data: tbodyData, properties: { keyForRowSelect: keyForRowSelect, outputKey: outputKey } };
+
+	                    var renderNestedElement = void 0;
+
+	                    if (typeof element.widget === "string") {
+	                        renderNestedElement = _this2.props.getWidget(_extends({}, element, { data: tbodyData }));
+	                    } else {
+	                        renderNestedElement = _react2.default.createElement(element.widget, _extends({}, element, { data: tbodyData }), null);
+	                    }
+
+	                    return _react2.default.createElement(
+	                        'div',
+	                        { style: nestedElementStyle, className: _gridDesign2.default["nestedElement"] },
+	                        renderNestedElement
+	                    );
+	                }) : ""
 	            );
 	        }
 	    }, {
