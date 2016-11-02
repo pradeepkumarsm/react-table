@@ -155,9 +155,11 @@ export default class Grid extends Component {
         });
 
         if (this.props.async) {
-            this.props.onPageSizeChange(newPageSize, this.state.pageNum);
+            this.props.onPageSizeChange({
+                pageSize: newPageSize,
+                pageNum: this.state.pageNum
+            });
         }
-
     }
 
     getPageSize() {
@@ -430,29 +432,29 @@ export default class Grid extends Component {
 
         return <div key={"grid" + rowIndex} className={rowClass} style={rowStyle}>
             {optedColumns}
-                {
-                    (showNestedElement && showNestedElement[currentRowKey] && nestedElements && nestedElements.length) ? nestedElements.map((element) => {
-                        // element.onChildRowSelect = this.onChildRowSelect.bind(null, tbodyData, element);
-                        //Passing Required Parent Properties to its children
-                        const {keyForRowSelect, outputKey} = this.props;
-                        element.parentDetails = {data: tbodyData, properties: {keyForRowSelect, outputKey}};
+            {
+                (showNestedElement && showNestedElement[currentRowKey] && nestedElements && nestedElements.length) ? nestedElements.map((element) => {
+                    // element.onChildRowSelect = this.onChildRowSelect.bind(null, tbodyData, element);
+                    //Passing Required Parent Properties to its children
+                    const {keyForRowSelect, outputKey} = this.props;
+                    element.parentDetails = {data: tbodyData, properties: {keyForRowSelect, outputKey}};
 
-                        let renderNestedElement;
+                    let renderNestedElement;
 
-                        if (typeof(element.widget) === "string") {
-                            renderNestedElement =  this.props.getWidget({...element, data: tbodyData});
-                        } else {
-                            renderNestedElement =  React.createElement(element.widget, {...element, data: tbodyData}, null);
-                        }
+                    if (typeof(element.widget) === "string") {
+                        renderNestedElement = this.props.getWidget({...element, data: tbodyData});
+                    } else {
+                        renderNestedElement = React.createElement(element.widget, {...element, data: tbodyData}, null);
+                    }
 
-                        return (
-                            <div style={nestedElementStyle} className={gridDesign["nestedElement"]}>
-                                {renderNestedElement}
-                            </div>
-                        )
+                    return (
+                        <div style={nestedElementStyle} className={gridDesign["nestedElement"]}>
+                            {renderNestedElement}
+                        </div>
+                    )
 
-                    }) : ""
-                }
+                }) : ""
+            }
         </div>;
     }
 

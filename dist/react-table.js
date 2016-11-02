@@ -1740,7 +1740,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	            });
 
 	            if (this.props.async) {
-	                this.props.onPageSizeChange(newPageSize, this.state.pageNum);
+	                this.props.onPageSizeChange({
+	                    pageSize: newPageSize,
+	                    pageNum: this.state.pageNum
+	                });
 	            }
 	        }
 	    }, {
@@ -2174,6 +2177,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    pages: [25, 50, 100, 500],
 	    data: [],
 	    async: false,
+	    count: 0,
 	    style: {},
 	    noData: false,
 	    options: {
