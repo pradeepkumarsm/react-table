@@ -61,7 +61,6 @@ class Basic extends Component{
             <div>
                 Basic component
                 <Grid
-                    ref="gridDetails"
                     key="gridDetails"
                     showLoader={false}
                     style={style}

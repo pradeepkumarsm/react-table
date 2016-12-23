@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Template from './grid-template.js';
 import classes from 'classnames';
-import {get} from 'lodash';
+import {get, isEmpty} from 'lodash';
 import Sort from 'data-sorter';
 
 import gridDesign from  './grid-design.css';
@@ -28,7 +28,6 @@ export default class Grid extends Component {
         this.setParentValue = this.setParentValue.bind(this);
         this.handlePageClick = this.handlePageClick.bind(this);
         this.setPageSize = this.setPageSize.bind(this);
-        this.rowOnChange = this.rowOnChange.bind(this);
     }
 
     componentWillMount() {
@@ -99,16 +98,16 @@ export default class Grid extends Component {
     }
 
     rowOnChange(tbodyData, event) {
-        const {onChildRowSelect, onRowSelect, multiSelect, parentDetails} = this.props;
+        const {onChildRowSelect, onRowSelect, multiSelect, parentDetails, keyForRowSelect} = this.props;
 
         const multiSelectRows = (multiSelect !== undefined) ? multiSelect : true;
 
-        const currentRow = {[tbodyData[this.props.keyForRowSelect]]: tbodyData};
+        const currentRow = {[tbodyData[keyForRowSelect]]: tbodyData};
 
         if (event.target.checked) {
             this.selectedRows = multiSelectRows ? Object.assign({}, this.selectedRows, currentRow) : currentRow;
         } else {
-            delete this.selectedRows[tbodyData[this.props.keyForRowSelect]];
+            delete this.selectedRows[tbodyData[keyForRowSelect]];
         }
         onRowSelect && onRowSelect(parentDetails ? {
             parentDetails,
@@ -126,8 +125,9 @@ export default class Grid extends Component {
             const details = {
                 element: column,
                 data: tbodyData,
+                selectedRows: this.selectedRows,
                 parentProperties: this.props,
-                rowOnChange: this.rowOnChange
+                rowOnChange: this.rowOnChange.bind(this, tbodyData)
             };
             if (typeof(column.widget) === "string") {
                 displayData = this.props.getWidget(details);
@@ -240,7 +240,7 @@ export default class Grid extends Component {
 
 
     getRow(option, tbodyData, rowIndex) {
-        const {selectAllRowsOnMount, getRowStyle, showNestedElement, keyForRowSelect, options, options : {columns, nestedElements}, style:{tHeadRowStyle, nestedElementStyle, tBodyRowstyle, tdStyle, thStyle, trStyle}} = this.props;
+        const { selectAllRowsOnMount, defaultValue, getRowStyle, showNestedElement, keyForRowSelect, options, options : { columns, nestedElements }, style:{ tHeadRowStyle, nestedElementStyle, tBodyRowstyle, tdStyle, thStyle, trStyle } } = this.props;
 
         var tableClassNames = options.classNames ? options.classNames : {},
             column,
@@ -375,7 +375,7 @@ export default class Grid extends Component {
             rowClass = classes(gridDesign["sentinelDataRow"], (rowIndex % 2 === 0) ? gridDesign["evenColor"] : gridDesign["oddColor"], tableClassNames.tbodyRowClass);
 
             //select all values
-            if (selectAllRowsOnMount) {
+            if (isEmpty(defaultValue) && selectAllRowsOnMount) {
                 const currentRow = {[tbodyData[this.props.keyForRowSelect]]: tbodyData};
                 this.selectedRows = Object.assign({}, this.selectedRows, currentRow);
             }

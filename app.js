@@ -10,6 +10,7 @@ import notFound from './pages/NotFound';
 import Sorting from "./pages/Sorting";
 import Nested from "./pages/Nested";
 import Async from './pages/Async';
+import RowSelect from './pages/RowSelect';
 
 
 render(
@@ -19,6 +20,7 @@ render(
             <Route path="sorting" component={Sorting}/>
             <Route path="nested" component={Nested}/>
             <Route path="async" component={Async}/>
+            <Route path="rowselect" component={RowSelect}/>
             <Route path="*" component={notFound}/>
         </Route>
     </Router>,
