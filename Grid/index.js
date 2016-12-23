@@ -240,7 +240,7 @@ export default class Grid extends Component {
 
 
     getRow(option, tbodyData, rowIndex) {
-        const { selectAllRowsOnMount, defaultValue, getRowStyle, showNestedElement, keyForRowSelect, options, options : { columns, nestedElements }, style:{ tHeadRowStyle, nestedElementStyle, tBodyRowstyle, tdStyle, thStyle, trStyle } } = this.props;
+        const { selectAll, defaultValue, getRowStyle, showNestedElement, keyForRowSelect, options, options : { columns, nestedElements }, style:{ tHeadRowStyle, nestedElementStyle, tBodyRowstyle, tdStyle, thStyle, trStyle } } = this.props;
 
         var tableClassNames = options.classNames ? options.classNames : {},
             column,
@@ -375,7 +375,7 @@ export default class Grid extends Component {
             rowClass = classes(gridDesign["sentinelDataRow"], (rowIndex % 2 === 0) ? gridDesign["evenColor"] : gridDesign["oddColor"], tableClassNames.tbodyRowClass);
 
             //select all values
-            if (isEmpty(defaultValue) && selectAllRowsOnMount) {
+            if (isEmpty(defaultValue) && selectAll) {
                 const currentRow = {[tbodyData[this.props.keyForRowSelect]]: tbodyData};
                 this.selectedRows = Object.assign({}, this.selectedRows, currentRow);
             }

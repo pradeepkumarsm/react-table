@@ -49,6 +49,7 @@ class Basic extends Component{
                     showLoader={false}
                     style={style}
                     onRowSelect={this.onRowSelect}
+                    selectAll = {false}
                     selectAllRowsOnMount = {this.selectedRowsOnMount}
                     defaultValue = {this.state.defaultValue}
                     keyForRowSelect = "ipAddress"
