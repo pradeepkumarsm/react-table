@@ -1597,7 +1597,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _this.setParentValue = _this.setParentValue.bind(_this);
 	        _this.handlePageClick = _this.handlePageClick.bind(_this);
 	        _this.setPageSize = _this.setPageSize.bind(_this);
-	        _this.rowOnChange = _this.rowOnChange.bind(_this);
 	        return _this;
 	    }
 
@@ -1684,16 +1683,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var onRowSelect = _props2.onRowSelect;
 	            var multiSelect = _props2.multiSelect;
 	            var parentDetails = _props2.parentDetails;
+	            var keyForRowSelect = _props2.keyForRowSelect;
 
 
 	            var multiSelectRows = multiSelect !== undefined ? multiSelect : true;
 
-	            var currentRow = _defineProperty({}, tbodyData[this.props.keyForRowSelect], tbodyData);
+	            var currentRow = _defineProperty({}, tbodyData[keyForRowSelect], tbodyData);
 
 	            if (event.target.checked) {
 	                this.selectedRows = multiSelectRows ? Object.assign({}, this.selectedRows, currentRow) : currentRow;
 	            } else {
-	                delete this.selectedRows[tbodyData[this.props.keyForRowSelect]];
+	                delete this.selectedRows[tbodyData[keyForRowSelect]];
 	            }
 	            onRowSelect && onRowSelect(parentDetails ? {
 	                parentDetails: parentDetails,
@@ -1713,8 +1713,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	                var details = {
 	                    element: column,
 	                    data: tbodyData,
+	                    selectedRows: this.selectedRows,
 	                    parentProperties: this.props,
-	                    rowOnChange: this.rowOnChange
+	                    rowOnChange: this.rowOnChange.bind(this, tbodyData)
 	                };
 	                if (typeof column.widget === "string") {
 	                    displayData = this.props.getWidget(details);
@@ -1847,7 +1848,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var _this2 = this;
 
 	            var _props3 = this.props;
-	            var selectAllRowsOnMount = _props3.selectAllRowsOnMount;
+	            var selectAll = _props3.selectAll;
+	            var defaultValue = _props3.defaultValue;
 	            var getRowStyle = _props3.getRowStyle;
 	            var showNestedElement = _props3.showNestedElement;
 	            var keyForRowSelect = _props3.keyForRowSelect;
@@ -2031,7 +2033,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                rowClass = (0, _classnames2.default)(_gridDesign2.default["sentinelDataRow"], rowIndex % 2 === 0 ? _gridDesign2.default["evenColor"] : _gridDesign2.default["oddColor"], tableClassNames.tbodyRowClass);
 
 	                //select all values
-	                if (selectAllRowsOnMount) {
+	                if ((0, _lodash.isEmpty)(defaultValue) && selectAll) {
 	                    var currentRow = _defineProperty({}, tbodyData[this.props.keyForRowSelect], tbodyData);
 	                    this.selectedRows = Object.assign({}, this.selectedRows, currentRow);
 	                }
