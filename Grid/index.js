@@ -276,7 +276,7 @@ export default class Grid extends Component {
                     sortedOrder = this.state.sortedOrder[key],
                     columnName;
 
-                columnName = column.name ? this.getColumnName(column.name, this.props) : "Column Name";
+                columnName = column.name ? this.getColumnName(column.name, this.props) : "";
 
                 if (column.style) {
                     const {columnStyle, headerStyle} = column.style;
@@ -307,7 +307,7 @@ export default class Grid extends Component {
                     childColumns = childColumnNames.map((childKey, index) => {
                         childColumn = column.childColumns[childKey];
 
-                        childColumnHeader = childColumn.name ? this.getColumnName(childColumn.name) : "Child column name";
+                        childColumnHeader = childColumn.name ? this.getColumnName(childColumn.name) : "";
 
                         childColumnClass = classes(tableClassNames.tbodyColClass, gridDesign["sentinelCol"], {
                             [gridDesign["removeFlex"]]: childColumn.width

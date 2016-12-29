@@ -1899,7 +1899,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        sortedOrder = _this2.state.sortedOrder[key],
 	                        columnName = void 0;
 
-	                    columnName = column.name ? _this2.getColumnName(column.name, _this2.props) : "Column Name";
+	                    columnName = column.name ? _this2.getColumnName(column.name, _this2.props) : "";
 
 	                    if (column.style) {
 	                        var _column$style = column.style;
@@ -1928,7 +1928,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                            childColumns = childColumnNames.map(function (childKey, index) {
 	                                childColumn = column.childColumns[childKey];
 
-	                                childColumnHeader = childColumn.name ? _this2.getColumnName(childColumn.name) : "Child column name";
+	                                childColumnHeader = childColumn.name ? _this2.getColumnName(childColumn.name) : "";
 
 	                                childColumnClass = (0, _classnames2.default)(tableClassNames.tbodyColClass, _gridDesign2.default["sentinelCol"], _defineProperty({}, _gridDesign2.default["removeFlex"], childColumn.width), childColumn.columnClass);
 
