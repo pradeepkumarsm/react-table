@@ -1,4 +1,6 @@
 import Checkbox from '../../Components/Checkbox';
+import SelectAllCheckbox from '../../Components/SelectAllCheckbox';
+import ButtonOrTextBox from '../../Components/ButtonOrTextBox';
 
 export default {
     classNames: {
@@ -11,7 +13,7 @@ export default {
     columns:[
         {
             "id":"check",
-            "name":"",
+            "name": SelectAllCheckbox,
             "widget": Checkbox,
             "options":{
                 "valueParam":"ipAddress"
@@ -116,7 +118,7 @@ export default {
                 "sortingKey": "buttonColor" //This value will be used for sorting
             },
             "sortData": true,
-            "widget":"button",
+            "widget":ButtonOrTextBox,
             "style":{
                 "columnStyle":{
                 },

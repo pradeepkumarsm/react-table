@@ -238,6 +238,14 @@ export default class Grid extends Component {
         }
     }
 
+    getColumnName(name, allProperties){
+        if(typeof(name) === "string"){
+            return name;
+        }else{
+            return React.createElement(name, {...allProperties});
+        }
+    }
+
 
     getRow(option, tbodyData, rowIndex) {
         const { selectAll, defaultValue, getRowStyle, showNestedElement, keyForRowSelect, options, options : { columns, nestedElements }, style:{ tHeadRowStyle, nestedElementStyle, tBodyRowstyle, tdStyle, thStyle, trStyle } } = this.props;
@@ -265,8 +273,10 @@ export default class Grid extends Component {
                 let result,
                     colHeaderStyle = thStyle ? thStyle : {},
                     key = column.id,
-                    sortedOrder = this.state.sortedOrder[key];
+                    sortedOrder = this.state.sortedOrder[key],
+                    columnName;
 
+                columnName = column.name ? this.getColumnName(column.name, this.props) : "Column Name";
 
                 if (column.style) {
                     const {columnStyle, headerStyle} = column.style;
@@ -289,12 +299,16 @@ export default class Grid extends Component {
                     let childColumnNames = Object.keys(column.childColumns),
                         childColumns,
                         childColumn,
-                        childColumnClass;
+                        childColumnClass,
+                        childColumnHeader;
 
                     columnClasses = classes(columnClasses, "sectionWrapper");
 
                     childColumns = childColumnNames.map((childKey, index) => {
                         childColumn = column.childColumns[childKey];
+
+                        childColumnHeader = childColumn.name ? this.getColumnName(childColumn.name) : "Child column name";
+
                         childColumnClass = classes(tableClassNames.tbodyColClass, gridDesign["sentinelCol"], {
                             [gridDesign["removeFlex"]]: childColumn.width
                         }, childColumn.columnClass);
@@ -316,7 +330,7 @@ export default class Grid extends Component {
                                 className={childColumnClass} key={childKey}>
                                 <div className={gridDesign["keyContainer"]}>
                                     <span
-                                        className={gridDesign["headingText"]}>{childColumn.name ? childColumn.name : childKey} </span>
+                                        className={gridDesign["headingText"]}>{childColumnHeader} </span>
                                 </div>
                                 <div className={gridDesign["sortingIcons"]}>
                                     <div className={gridDesign["sortingIconsContainer"]}>
@@ -329,7 +343,7 @@ export default class Grid extends Component {
                         } else {
                             return (<div className={childColumnClass} key={childKey}>
                                 <span
-                                    className={gridDesign["headingText"]}>{childColumn.name ? childColumn.name : childKey} </span>
+                                    className={gridDesign["headingText"]}>{childColumnHeader} </span>
                             </div>)
                         }
 
@@ -348,7 +362,7 @@ export default class Grid extends Component {
                              key={key} style={colHeaderStyle}>
                             <div className={gridDesign["keyContainer"]}>
 									<span className={gridDesign["headingText"]}>
-										{column.name === undefined ? key : column.name}
+										{columnName}
 									</span>
                             </div>
                             <div className={gridDesign["sortingIcons"]}>
@@ -361,7 +375,7 @@ export default class Grid extends Component {
                         </div>);
                 } else {
                     return <div className={columnClasses} key={key} style={colHeaderStyle}> <span
-                        className={gridDesign["headingText"]}>{column.name === undefined ? key : column.name}</span>
+                        className={gridDesign["headingText"]}>{columnName}</span>
                     </div>
                 }
             });
@@ -375,7 +389,7 @@ export default class Grid extends Component {
             rowClass = classes(gridDesign["sentinelDataRow"], (rowIndex % 2 === 0) ? gridDesign["evenColor"] : gridDesign["oddColor"], tableClassNames.tbodyRowClass);
 
             //select all values
-            if (isEmpty(defaultValue) && selectAll) {
+            if (selectAll) {
                 const currentRow = {[tbodyData[this.props.keyForRowSelect]]: tbodyData};
                 this.selectedRows = Object.assign({}, this.selectedRows, currentRow);
             }

@@ -1843,6 +1843,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	        }
 	    }, {
+	        key: 'getColumnName',
+	        value: function getColumnName(name, allProperties) {
+	            if (typeof name === "string") {
+	                return name;
+	            } else {
+	                return _react2.default.createElement(name, _extends({}, allProperties));
+	            }
+	        }
+	    }, {
 	        key: 'getRow',
 	        value: function getRow(option, tbodyData, rowIndex) {
 	            var _this2 = this;
@@ -1886,7 +1895,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    var result = void 0,
 	                        colHeaderStyle = thStyle ? thStyle : {},
 	                        key = column.id,
-	                        sortedOrder = _this2.state.sortedOrder[key];
+	                        sortedOrder = _this2.state.sortedOrder[key],
+	                        columnName = void 0;
+
+	                    columnName = column.name ? _this2.getColumnName(column.name, _this2.props) : "Column Name";
 
 	                    if (column.style) {
 	                        var _column$style = column.style;
@@ -1907,12 +1919,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	                            var childColumnNames = Object.keys(column.childColumns),
 	                                childColumns = void 0,
 	                                childColumn = void 0,
-	                                childColumnClass = void 0;
+	                                childColumnClass = void 0,
+	                                childColumnHeader = void 0;
 
 	                            columnClasses = (0, _classnames2.default)(columnClasses, "sectionWrapper");
 
 	                            childColumns = childColumnNames.map(function (childKey, index) {
 	                                childColumn = column.childColumns[childKey];
+
+	                                childColumnHeader = childColumn.name ? _this2.getColumnName(childColumn.name) : "Child column name";
+
 	                                childColumnClass = (0, _classnames2.default)(tableClassNames.tbodyColClass, _gridDesign2.default["sentinelCol"], _defineProperty({}, _gridDesign2.default["removeFlex"], childColumn.width), childColumn.columnClass);
 
 	                                if (childColumn.sortData && _this2.state.data.length) {
@@ -1935,7 +1951,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                                'span',
 	                                                {
 	                                                    className: _gridDesign2.default["headingText"] },
-	                                                childColumn.name ? childColumn.name : childKey,
+	                                                childColumnHeader,
 	                                                ' '
 	                                            )
 	                                        ),
@@ -1958,7 +1974,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                            'span',
 	                                            {
 	                                                className: _gridDesign2.default["headingText"] },
-	                                            childColumn.name ? childColumn.name : childKey,
+	                                            childColumnHeader,
 	                                            ' '
 	                                        )
 	                                    );
@@ -1996,7 +2012,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                _react2.default.createElement(
 	                                    'span',
 	                                    { className: _gridDesign2.default["headingText"] },
-	                                    column.name === undefined ? key : column.name
+	                                    columnName
 	                                )
 	                            ),
 	                            _react2.default.createElement(
@@ -2019,7 +2035,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                'span',
 	                                {
 	                                    className: _gridDesign2.default["headingText"] },
-	                                column.name === undefined ? key : column.name
+	                                columnName
 	                            )
 	                        );
 	                    }
@@ -2033,7 +2049,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                rowClass = (0, _classnames2.default)(_gridDesign2.default["sentinelDataRow"], rowIndex % 2 === 0 ? _gridDesign2.default["evenColor"] : _gridDesign2.default["oddColor"], tableClassNames.tbodyRowClass);
 
 	                //select all values
-	                if ((0, _lodash.isEmpty)(defaultValue) && selectAll) {
+	                if (selectAll) {
 	                    var currentRow = _defineProperty({}, tbodyData[this.props.keyForRowSelect], tbodyData);
 	                    this.selectedRows = Object.assign({}, this.selectedRows, currentRow);
 	                }

@@ -6,8 +6,12 @@ import vipTableConfig,{style} from './vipTableConfig';
 class Basic extends Component{
     constructor(){
         super();
-        this.state = {defaultValue : {}};
+        this.state = {
+            defaultValue : {},
+            selectAll: false
+        };
         this.onRowSelect = this.onRowSelect.bind(this);
+        this.onSelectAll = this.onSelectAll.bind(this);
 
     }
     getWidget(details){
@@ -23,13 +27,21 @@ class Basic extends Component{
 
     selectedRowsOnMount(dataToSelect){
         debugger;
+    }
 
+    onSelectAll(event){
+        const {defaultValue} = this.state;
+        this.setState({
+            selectAll : event.currentTarget.checked,
+            defaultValue: event.currentTarget.checked ? defaultValue : {}
+        })
     }
 
     onRowSelect(data){
         debugger;
         this.setState({
-            defaultValue : data
+            defaultValue : data,
+            selectAll: false
         })
     }
 
@@ -49,13 +61,14 @@ class Basic extends Component{
                     showLoader={false}
                     style={style}
                     onRowSelect={this.onRowSelect}
-                    selectAll = {false}
+                    selectAll = {this.state.selectAll}
                     selectAllRowsOnMount = {this.selectedRowsOnMount}
                     defaultValue = {this.state.defaultValue}
                     keyForRowSelect = "ipAddress"
                     getWidget={this.getWidget}
                     options={vipTableConfig}
-                    data={data? data: []}/>
+                    data={data? data: []}
+                    onSelectAll = {this.onSelectAll}/>
             </div>
         )
     }
