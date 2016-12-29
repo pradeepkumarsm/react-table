@@ -248,7 +248,7 @@ export default class Grid extends Component {
 
 
     getRow(option, tbodyData, rowIndex) {
-        const { selectAll, defaultValue, getRowStyle, showNestedElement, keyForRowSelect, options, options : { columns, nestedElements }, style:{ tHeadRowStyle, nestedElementStyle, tBodyRowstyle, tdStyle, thStyle, trStyle } } = this.props;
+        const { selectAll, defaultValue, getRowStyle, rowEvents, showNestedElement, keyForRowSelect, options, options : { columns, nestedElements }, style:{ tHeadRowStyle, nestedElementStyle, tBodyRowstyle, tdStyle, thStyle, trStyle } } = this.props;
 
         var tableClassNames = options.classNames ? options.classNames : {},
             column,
@@ -443,8 +443,18 @@ export default class Grid extends Component {
             });
         }
 
+        let additionalParams = {};
+        if(rowEvents.onClick){
+            additionalParams.onClick = () => rowEvents.onClick(tbodyData, rowIndex);
+        }else if(rowEvents.onMouseOver){
+            additionalParams.onMouseOver = () => rowEvents.onMouseOver(tbodyData, rowIndex);
+        }
 
-        return <div key={"grid" + rowIndex} className={rowClass} style={rowStyle}>
+
+        return <div key={"grid" + rowIndex}
+                    className={rowClass}
+                    {...additionalParams}
+                    style={rowStyle}>
             {optedColumns}
             {
                 (showNestedElement && showNestedElement[currentRowKey] && nestedElements && nestedElements.length) ? nestedElements.map((element) => {

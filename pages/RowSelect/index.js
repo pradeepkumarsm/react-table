@@ -37,6 +37,10 @@ class Basic extends Component{
         })
     }
 
+    onRowClick(rowValue, index){
+        debugger;
+    }
+
     onRowSelect(data){
         debugger;
         this.setState({
@@ -68,6 +72,9 @@ class Basic extends Component{
                     getWidget={this.getWidget}
                     options={vipTableConfig}
                     data={data? data: []}
+                    rowEvents = {{
+                      onClick : this.onRowClick
+                    }}
                     onSelectAll = {this.onSelectAll}/>
             </div>
         )

@@ -1860,6 +1860,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var selectAll = _props3.selectAll;
 	            var defaultValue = _props3.defaultValue;
 	            var getRowStyle = _props3.getRowStyle;
+	            var rowEvents = _props3.rowEvents;
 	            var showNestedElement = _props3.showNestedElement;
 	            var keyForRowSelect = _props3.keyForRowSelect;
 	            var options = _props3.options;
@@ -2108,9 +2109,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	                });
 	            }
 
+	            var additionalParams = {};
+	            if (rowEvents.onClick) {
+	                additionalParams.onClick = function () {
+	                    return rowEvents.onClick(tbodyData, rowIndex);
+	                };
+	            } else if (rowEvents.onMouseOver) {
+	                additionalParams.onMouseOver = function () {
+	                    return rowEvents.onMouseOver(tbodyData, rowIndex);
+	                };
+	            }
+
 	            return _react2.default.createElement(
 	                'div',
-	                { key: "grid" + rowIndex, className: rowClass, style: rowStyle },
+	                _extends({ key: "grid" + rowIndex,
+	                    className: rowClass
+	                }, additionalParams, {
+	                    style: rowStyle }),
 	                optedColumns,
 	                showNestedElement && showNestedElement[currentRowKey] && nestedElements && nestedElements.length ? nestedElements.map(function (element) {
 	                    // element.onChildRowSelect = this.onChildRowSelect.bind(null, tbodyData, element);
