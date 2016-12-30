@@ -13,8 +13,18 @@ export default {
     columns:[
         {
             "id":"check",
-            "name": SelectAllCheckbox,
-            "widget": Checkbox,
+            "name": {
+                component: SelectAllCheckbox,
+                componentProps : {
+                    display: "block"
+                }
+            },
+            "widget": {
+                component: Checkbox,
+                componentProps : {
+                    name: "Something"
+                }
+            },
             "options":{
                 "valueParam":"ipAddress"
             },
@@ -118,7 +128,9 @@ export default {
                 "sortingKey": "buttonColor" //This value will be used for sorting
             },
             "sortData": true,
-            "widget":ButtonOrTextBox,
+            "widget":{
+                component: ButtonOrTextBox
+            },
             "style":{
                 "columnStyle":{
                 },

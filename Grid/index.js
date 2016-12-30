@@ -135,7 +135,8 @@ export default class Grid extends Component {
                     return displayData;
                 return displayData ? displayData : "-";
             } else {
-                return React.createElement(column.widget, {...details}, null);
+                const {component, componentProps} = column.widget;
+                return React.createElement(component, {...details, ...componentProps}, null);
             }
 
         } else {
@@ -242,7 +243,8 @@ export default class Grid extends Component {
         if(typeof(name) === "string"){
             return name;
         }else{
-            return React.createElement(name, {...allProperties});
+            const {component, componentProps} = name;
+            return React.createElement(component, {...allProperties, ...componentProps});
         }
     }
 
@@ -467,7 +469,8 @@ export default class Grid extends Component {
                     if (typeof(element.widget) === "string") {
                         renderNestedElement = this.props.getWidget({...element, data: tbodyData});
                     } else {
-                        renderNestedElement = React.createElement(element.widget, {...element, data: tbodyData}, null);
+                        const {component, componentProps} = element.widget;
+                        renderNestedElement = React.createElement(component, {...element, data: tbodyData, ...componentProps}, null);
                     }
 
                     return (

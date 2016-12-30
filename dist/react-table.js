@@ -1722,7 +1722,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    if (typeof displayData === "number") return displayData;
 	                    return displayData ? displayData : "-";
 	                } else {
-	                    return _react2.default.createElement(column.widget, _extends({}, details), null);
+	                    var _column$widget = column.widget;
+	                    var component = _column$widget.component;
+	                    var componentProps = _column$widget.componentProps;
+
+	                    return _react2.default.createElement(component, _extends({}, details, componentProps), null);
 	                }
 	            } else {
 	                displayData = Array.isArray(valueParam) ? (0, _lodash.get)(tbodyData, valueParam) : tbodyData[valueParam];
@@ -1848,7 +1852,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	            if (typeof name === "string") {
 	                return name;
 	            } else {
-	                return _react2.default.createElement(name, _extends({}, allProperties));
+	                var component = name.component;
+	                var componentProps = name.componentProps;
+
+	                return _react2.default.createElement(component, _extends({}, allProperties, componentProps));
 	            }
 	        }
 	    }, {
@@ -2138,7 +2145,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    if (typeof element.widget === "string") {
 	                        renderNestedElement = _this2.props.getWidget(_extends({}, element, { data: tbodyData }));
 	                    } else {
-	                        renderNestedElement = _react2.default.createElement(element.widget, _extends({}, element, { data: tbodyData }), null);
+	                        var _element$widget = element.widget;
+	                        var component = _element$widget.component;
+	                        var componentProps = _element$widget.componentProps;
+
+	                        renderNestedElement = _react2.default.createElement(component, _extends({}, element, { data: tbodyData }, componentProps), null);
 	                    }
 
 	                    return _react2.default.createElement(
