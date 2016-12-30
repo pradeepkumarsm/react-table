@@ -2110,15 +2110,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 
 	            var additionalParams = {};
-	            if (rowEvents.onClick) {
-	                additionalParams.onClick = function () {
-	                    return rowEvents.onClick(tbodyData, rowIndex);
+
+	            rowEvents && Object.keys(rowEvents).map(function (attachRowEvent) {
+	                additionalParams[attachRowEvent] = function () {
+	                    return rowEvents[attachRowEvent](tbodyData, rowIndex);
 	                };
-	            } else if (rowEvents.onMouseOver) {
-	                additionalParams.onMouseOver = function () {
-	                    return rowEvents.onMouseOver(tbodyData, rowIndex);
-	                };
-	            }
+	            });
 
 	            return _react2.default.createElement(
 	                'div',

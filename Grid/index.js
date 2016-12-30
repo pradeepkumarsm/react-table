@@ -444,11 +444,10 @@ export default class Grid extends Component {
         }
 
         let additionalParams = {};
-        if(rowEvents.onClick){
-            additionalParams.onClick = () => rowEvents.onClick(tbodyData, rowIndex);
-        }else if(rowEvents.onMouseOver){
-            additionalParams.onMouseOver = () => rowEvents.onMouseOver(tbodyData, rowIndex);
-        }
+
+        rowEvents && Object.keys(rowEvents).map((attachRowEvent) => {
+            additionalParams[attachRowEvent] = () => rowEvents[attachRowEvent](tbodyData, rowIndex)
+        });
 
 
         return <div key={"grid" + rowIndex}
