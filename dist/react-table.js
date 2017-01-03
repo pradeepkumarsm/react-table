@@ -2143,13 +2143,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    var renderNestedElement = void 0;
 
 	                    if (typeof element.widget === "string") {
-	                        renderNestedElement = _this2.props.getWidget(_extends({}, element, { data: tbodyData }));
+	                        renderNestedElement = _this2.props.getWidget({ element: element, data: tbodyData });
 	                    } else {
 	                        var _element$widget = element.widget;
 	                        var component = _element$widget.component;
 	                        var componentProps = _element$widget.componentProps;
 
-	                        renderNestedElement = _react2.default.createElement(component, _extends({}, element, { data: tbodyData }, componentProps), null);
+	                        renderNestedElement = _react2.default.createElement(component, _extends({ element: element, data: tbodyData }, componentProps), null);
 	                    }
 
 	                    return _react2.default.createElement(

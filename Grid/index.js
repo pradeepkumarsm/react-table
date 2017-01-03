@@ -467,10 +467,10 @@ export default class Grid extends Component {
                     let renderNestedElement;
 
                     if (typeof(element.widget) === "string") {
-                        renderNestedElement = this.props.getWidget({...element, data: tbodyData});
+                        renderNestedElement = this.props.getWidget({element, data: tbodyData});
                     } else {
                         const {component, componentProps} = element.widget;
-                        renderNestedElement = React.createElement(component, {...element, data: tbodyData, ...componentProps}, null);
+                        renderNestedElement = React.createElement(component, {element, data: tbodyData, ...componentProps}, null);
                     }
 
                     return (
