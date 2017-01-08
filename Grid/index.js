@@ -174,7 +174,7 @@ export default class Grid extends Component {
                 <label htmlFor="pageSize">Page size: </label>
                 <select id="pageSize" onChange={this.setPageSize}>{options}</select>
                 {(this.props.async) ?
-                    <span className="totalIncidents">Total Incidents : {this.state.totalIncidents} </span> : ""}
+                    <span className="totalIncidents">Total : {this.state.totalIncidents} </span> : ""}
             </div>
         );
 

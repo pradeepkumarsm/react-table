@@ -1779,7 +1779,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                this.props.async ? _react2.default.createElement(
 	                    'span',
 	                    { className: 'totalIncidents' },
-	                    'Total Incidents : ',
+	                    'Total : ',
 	                    this.state.totalIncidents,
 	                    ' '
 	                ) : ""
