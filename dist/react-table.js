@@ -1594,7 +1594,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        };
 	        _this.selectedRows = {};
 	        _this.sortData = _this.sortData.bind(_this);
-	        _this.setParentValue = _this.setParentValue.bind(_this);
 	        _this.handlePageClick = _this.handlePageClick.bind(_this);
 	        _this.setPageSize = _this.setPageSize.bind(_this);
 	        return _this;
@@ -1617,27 +1616,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	            this.initializeTable(nextProps);
 	        }
 	    }, {
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-	            this.setParentValue();
-	        }
-	    }, {
 	        key: 'componentDidUpdate',
 	        value: function componentDidUpdate() {
-	            this.setParentValue();
-	        }
-	    }, {
-	        key: 'setParentValue',
-	        value: function setParentValue() {
 	            var _props = this.props;
-	            var selectAllRowsOnMount = _props.selectAllRowsOnMount;
+	            var selectAll = _props.selectAll;
+	            var selectedRowsOnSelectAll = _props.selectedRowsOnSelectAll;
 	            var parentDetails = _props.parentDetails;
 
 
-	            selectAllRowsOnMount && selectAllRowsOnMount(parentDetails ? {
-	                parentDetails: parentDetails,
-	                selectedRows: this.selectedRows
-	            } : this.selectedRows);
+	            if (selectAll) {
+	                selectedRowsOnSelectAll && selectedRowsOnSelectAll(parentDetails ? {
+	                    parentDetails: parentDetails,
+	                    selectedRows: this.selectedRows
+	                } : this.selectedRows);
+	            }
 	        }
 	    }, {
 	        key: 'initializeTable',

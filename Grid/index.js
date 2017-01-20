@@ -25,7 +25,6 @@ export default class Grid extends Component {
         };
         this.selectedRows = {};
         this.sortData = this.sortData.bind(this);
-        this.setParentValue = this.setParentValue.bind(this);
         this.handlePageClick = this.handlePageClick.bind(this);
         this.setPageSize = this.setPageSize.bind(this);
     }
@@ -44,21 +43,15 @@ export default class Grid extends Component {
         this.initializeTable(nextProps);
     }
 
-    componentDidMount() {
-        this.setParentValue();
-    }
+    componentDidUpdate(){
+      const {selectAll, selectedRowsOnSelectAll, parentDetails} = this.props;
 
-    componentDidUpdate() {
-        this.setParentValue();
-    }
-
-    setParentValue() {
-        const {selectAllRowsOnMount, parentDetails} = this.props;
-
-        selectAllRowsOnMount && selectAllRowsOnMount(parentDetails ? {
+      if(selectAll){
+        selectedRowsOnSelectAll && selectedRowsOnSelectAll(parentDetails ? {
             parentDetails,
             selectedRows: this.selectedRows
-        } : this.selectedRows);
+          } : this.selectedRows)
+      }
     }
 
     initializeTable(props) {

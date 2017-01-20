@@ -8,8 +8,10 @@ class Basic extends Component{
         super();
         this.state = {
             defaultValue : {},
-            selectAll: false
+            selectAll: false,
+            getSelectedDataOnSelectAll: false
         };
+        this.keyForRowSelect = "ipAddress";
         this.onRowSelect = this.onRowSelect.bind(this);
         this.onSelectAll = this.onSelectAll.bind(this);
 
@@ -25,7 +27,7 @@ class Basic extends Component{
         </div>)
     }
 
-    selectedRowsOnMount(dataToSelect){
+  selectedRowsOnSelectAll(dataToSelect){
         debugger;
     }
 
@@ -66,7 +68,7 @@ class Basic extends Component{
                     style={style}
                     onRowSelect={this.onRowSelect}
                     selectAll = {this.state.selectAll}
-                    selectAllRowsOnMount = {this.selectedRowsOnMount}
+                    selectedRowsOnSelectAll = {this.selectedRowsOnSelectAll}
                     defaultValue = {this.state.defaultValue}
                     keyForRowSelect = "ipAddress"
                     getWidget={this.getWidget}
