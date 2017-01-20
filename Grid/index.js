@@ -517,6 +517,7 @@ export default class Grid extends Component {
 
 
         if (async && data.length) {
+          this.renderedRows = data;
             outputData = data.map((data, index) => {
                 return this.getRow("body", data, index);
             });

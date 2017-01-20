@@ -2198,6 +2198,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                sendData = [];
 
 	            if (async && data.length) {
+	                this.renderedRows = data;
 	                outputData = data.map(function (data, index) {
 	                    return _this3.getRow("body", data, index);
 	                });
