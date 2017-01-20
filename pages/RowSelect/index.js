@@ -8,8 +8,7 @@ class Basic extends Component{
         super();
         this.state = {
             defaultValue : {},
-            selectAll: false,
-            getSelectedDataOnSelectAll: false
+            selectAll: false
         };
         this.keyForRowSelect = "ipAddress";
         this.onRowSelect = this.onRowSelect.bind(this);
@@ -27,10 +26,6 @@ class Basic extends Component{
         </div>)
     }
 
-  selectedRowsOnSelectAll(dataToSelect){
-        debugger;
-    }
-
     onSelectAll(event){
         const {defaultValue} = this.state;
         this.setState({
@@ -43,11 +38,11 @@ class Basic extends Component{
         debugger;
     }
 
-    onRowSelect(data){
+    onRowSelect(data, selectAll){
         debugger;
         this.setState({
             defaultValue : data,
-            selectAll: false
+            selectAll
         })
     }
 
@@ -68,16 +63,15 @@ class Basic extends Component{
                     style={style}
                     onRowSelect={this.onRowSelect}
                     selectAll = {this.state.selectAll}
-                    selectedRowsOnSelectAll = {this.selectedRowsOnSelectAll}
                     defaultValue = {this.state.defaultValue}
                     keyForRowSelect = "ipAddress"
                     getWidget={this.getWidget}
                     options={vipTableConfig}
                     data={data? data: []}
+                    pages = {[2, 5, 100, 500]}
                     rowEvents = {{
                       onClick : this.onRowClick
-                    }}
-                    onSelectAll = {this.onSelectAll}/>
+                    }}/>
             </div>
         )
     }

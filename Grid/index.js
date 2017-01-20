@@ -24,9 +24,13 @@ export default class Grid extends Component {
             sortedOrder: {}
         };
         this.selectedRows = {};
+        this.renderedRows = [];
         this.sortData = this.sortData.bind(this);
         this.handlePageClick = this.handlePageClick.bind(this);
         this.setPageSize = this.setPageSize.bind(this);
+        this.getColumnName = this.getColumnName.bind(this);
+        this.onSelectAll = this.onSelectAll.bind(this);
+        this.resetSelectedData = this.resetSelectedData.bind(this);
     }
 
     componentWillMount() {
@@ -41,17 +45,6 @@ export default class Grid extends Component {
 
     componentWillReceiveProps(nextProps) {
         this.initializeTable(nextProps);
-    }
-
-    componentDidUpdate(){
-      const {selectAll, selectedRowsOnSelectAll, parentDetails} = this.props;
-
-      if(selectAll){
-        selectedRowsOnSelectAll && selectedRowsOnSelectAll(parentDetails ? {
-            parentDetails,
-            selectedRows: this.selectedRows
-          } : this.selectedRows)
-      }
     }
 
     initializeTable(props) {
@@ -109,6 +102,32 @@ export default class Grid extends Component {
         // onRowSelect && onRowSelect(this.selectedRows);
     }
 
+    resetSelectedData(){
+      const {onRowSelect, parentDetails} = this.props;
+
+      onRowSelect && onRowSelect(parentDetails ? {
+          parentDetails,
+          selectedRows: {}
+        } : {}, false);
+    }
+
+    onSelectAll(event){
+        const {keyForRowSelect, onRowSelect, parentDetails} = this.props;
+        let allDataWithKeys = {};
+
+      if (event.target.checked) {
+            this.renderedRows.map((data) => {
+              Object.assign(allDataWithKeys, { [data[keyForRowSelect]]: data })
+            });
+      }
+
+      onRowSelect && onRowSelect(parentDetails ? {
+          parentDetails,
+          selectedRows: allDataWithKeys
+        } : allDataWithKeys, event.target.checked);
+
+    }
+
     showColumns(tbodyData, column, rowIndex) {
         var displayData;
         const {valueParam} = column.options;
@@ -142,6 +161,7 @@ export default class Grid extends Component {
 
     setPageSize(event) {
         var newPageSize = parseInt(event.target.value);
+        this.resetSelectedData();
         this.setState({
             pageSize: newPageSize,
             initialPosition: 0,
@@ -175,6 +195,7 @@ export default class Grid extends Component {
 
     handlePageClick(data) {
         const {onPageChange} = this.props;
+        this.resetSelectedData();
         if (this.props.async) {
             onPageChange && onPageChange(++data.selected);
         } else {
@@ -237,7 +258,10 @@ export default class Grid extends Component {
             return name;
         }else{
             const {component, componentProps} = name;
-            return React.createElement(component, {...allProperties, ...componentProps});
+            const selectAllForHeader = {
+              onSelectAll: this.onSelectAll,
+            };
+            return React.createElement(component, {...allProperties, ...componentProps, ...selectAllForHeader});
         }
     }
 
@@ -482,7 +506,6 @@ export default class Grid extends Component {
             noData = this.state.noData,
             async = this.props.async,
             sendDataToParent = this.props.paginated,
-            objectKeys,
             keyData,
             outputData,
             requiredData,
@@ -495,18 +518,19 @@ export default class Grid extends Component {
                 return this.getRow("body", data, index);
             });
         }
-        else if (data.length || Object.keys(data).length) {
-            objectKeys = Object.keys(data);
+        else if (data.length) {
             finalPosition = this.state.initialPosition + this.state.pageSize;
-            requiredData = objectKeys.slice(this.state.initialPosition, finalPosition);
+            requiredData = data.slice(this.state.initialPosition, finalPosition);
 
             if (sendDataToParent) {
                 sendData = data.slice(this.state.initialPosition, finalPosition);
                 sendDataToParent(sendData);
             }
-            outputData = requiredData.map((key, index) => {
-                keyData = data[key];
-                keyData.rowKey = key;
+
+            this.renderedRows = requiredData;
+            outputData = requiredData.map((currentData, index) => {
+                keyData = currentData;
+                keyData.rowKey = index;
                 return this.getRow("body", keyData, index);
             });
 
