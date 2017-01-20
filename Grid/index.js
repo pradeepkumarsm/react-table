@@ -98,7 +98,7 @@ export default class Grid extends Component {
         onRowSelect && onRowSelect(parentDetails ? {
             parentDetails,
             selectedRows: this.selectedRows
-        } : this.selectedRows);
+        } : this.selectedRows, false);
         // onRowSelect && onRowSelect(this.selectedRows);
     }
 

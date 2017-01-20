@@ -1593,9 +1593,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	            sortedOrder: {}
 	        };
 	        _this.selectedRows = {};
+	        _this.renderedRows = [];
 	        _this.sortData = _this.sortData.bind(_this);
 	        _this.handlePageClick = _this.handlePageClick.bind(_this);
 	        _this.setPageSize = _this.setPageSize.bind(_this);
+	        _this.getColumnName = _this.getColumnName.bind(_this);
+	        _this.onSelectAll = _this.onSelectAll.bind(_this);
+	        _this.resetSelectedData = _this.resetSelectedData.bind(_this);
 	        return _this;
 	    }
 
@@ -1614,22 +1618,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        key: 'componentWillReceiveProps',
 	        value: function componentWillReceiveProps(nextProps) {
 	            this.initializeTable(nextProps);
-	        }
-	    }, {
-	        key: 'componentDidUpdate',
-	        value: function componentDidUpdate() {
-	            var _props = this.props;
-	            var selectAll = _props.selectAll;
-	            var selectedRowsOnSelectAll = _props.selectedRowsOnSelectAll;
-	            var parentDetails = _props.parentDetails;
-
-
-	            if (selectAll) {
-	                selectedRowsOnSelectAll && selectedRowsOnSelectAll(parentDetails ? {
-	                    parentDetails: parentDetails,
-	                    selectedRows: this.selectedRows
-	                } : this.selectedRows);
-	            }
 	        }
 	    }, {
 	        key: 'initializeTable',
@@ -1670,12 +1658,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: 'rowOnChange',
 	        value: function rowOnChange(tbodyData, event) {
-	            var _props2 = this.props;
-	            var onChildRowSelect = _props2.onChildRowSelect;
-	            var onRowSelect = _props2.onRowSelect;
-	            var multiSelect = _props2.multiSelect;
-	            var parentDetails = _props2.parentDetails;
-	            var keyForRowSelect = _props2.keyForRowSelect;
+	            var _props = this.props;
+	            var onChildRowSelect = _props.onChildRowSelect;
+	            var onRowSelect = _props.onRowSelect;
+	            var multiSelect = _props.multiSelect;
+	            var parentDetails = _props.parentDetails;
+	            var keyForRowSelect = _props.keyForRowSelect;
 
 
 	            var multiSelectRows = multiSelect !== undefined ? multiSelect : true;
@@ -1690,8 +1678,42 @@ return /******/ (function(modules) { // webpackBootstrap
 	            onRowSelect && onRowSelect(parentDetails ? {
 	                parentDetails: parentDetails,
 	                selectedRows: this.selectedRows
-	            } : this.selectedRows);
+	            } : this.selectedRows, false);
 	            // onRowSelect && onRowSelect(this.selectedRows);
+	        }
+	    }, {
+	        key: 'resetSelectedData',
+	        value: function resetSelectedData() {
+	            var _props2 = this.props;
+	            var onRowSelect = _props2.onRowSelect;
+	            var parentDetails = _props2.parentDetails;
+
+
+	            onRowSelect && onRowSelect(parentDetails ? {
+	                parentDetails: parentDetails,
+	                selectedRows: {}
+	            } : {}, false);
+	        }
+	    }, {
+	        key: 'onSelectAll',
+	        value: function onSelectAll(event) {
+	            var _props3 = this.props;
+	            var keyForRowSelect = _props3.keyForRowSelect;
+	            var onRowSelect = _props3.onRowSelect;
+	            var parentDetails = _props3.parentDetails;
+
+	            var allDataWithKeys = {};
+
+	            if (event.target.checked) {
+	                this.renderedRows.map(function (data) {
+	                    Object.assign(allDataWithKeys, _defineProperty({}, data[keyForRowSelect], data));
+	                });
+	            }
+
+	            onRowSelect && onRowSelect(parentDetails ? {
+	                parentDetails: parentDetails,
+	                selectedRows: allDataWithKeys
+	            } : allDataWithKeys, event.target.checked);
 	        }
 	    }, {
 	        key: 'showColumns',
@@ -1730,6 +1752,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        key: 'setPageSize',
 	        value: function setPageSize(event) {
 	            var newPageSize = parseInt(event.target.value);
+	            this.resetSelectedData();
 	            this.setState({
 	                pageSize: newPageSize,
 	                initialPosition: 0,
@@ -1782,6 +1805,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        value: function handlePageClick(data) {
 	            var onPageChange = this.props.onPageChange;
 
+	            this.resetSelectedData();
 	            if (this.props.async) {
 	                onPageChange && onPageChange(++data.selected);
 	            } else {
@@ -1847,7 +1871,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	                var component = name.component;
 	                var componentProps = name.componentProps;
 
-	                return _react2.default.createElement(component, _extends({}, allProperties, componentProps));
+	                var selectAllForHeader = {
+	                    onSelectAll: this.onSelectAll
+	                };
+	                return _react2.default.createElement(component, _extends({}, allProperties, componentProps, selectAllForHeader));
 	            }
 	        }
 	    }, {
@@ -1855,24 +1882,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	        value: function getRow(option, tbodyData, rowIndex) {
 	            var _this2 = this;
 
-	            var _props3 = this.props;
-	            var selectAll = _props3.selectAll;
-	            var defaultValue = _props3.defaultValue;
-	            var getRowStyle = _props3.getRowStyle;
-	            var rowEvents = _props3.rowEvents;
-	            var showNestedElement = _props3.showNestedElement;
-	            var keyForRowSelect = _props3.keyForRowSelect;
-	            var options = _props3.options;
-	            var _props3$options = _props3.options;
-	            var columns = _props3$options.columns;
-	            var nestedElements = _props3$options.nestedElements;
-	            var _props3$style = _props3.style;
-	            var tHeadRowStyle = _props3$style.tHeadRowStyle;
-	            var nestedElementStyle = _props3$style.nestedElementStyle;
-	            var tBodyRowstyle = _props3$style.tBodyRowstyle;
-	            var tdStyle = _props3$style.tdStyle;
-	            var thStyle = _props3$style.thStyle;
-	            var trStyle = _props3$style.trStyle;
+	            var _props4 = this.props;
+	            var selectAll = _props4.selectAll;
+	            var defaultValue = _props4.defaultValue;
+	            var getRowStyle = _props4.getRowStyle;
+	            var rowEvents = _props4.rowEvents;
+	            var showNestedElement = _props4.showNestedElement;
+	            var keyForRowSelect = _props4.keyForRowSelect;
+	            var options = _props4.options;
+	            var _props4$options = _props4.options;
+	            var columns = _props4$options.columns;
+	            var nestedElements = _props4$options.nestedElements;
+	            var _props4$style = _props4.style;
+	            var tHeadRowStyle = _props4$style.tHeadRowStyle;
+	            var nestedElementStyle = _props4$style.nestedElementStyle;
+	            var tBodyRowstyle = _props4$style.tBodyRowstyle;
+	            var tdStyle = _props4$style.tdStyle;
+	            var thStyle = _props4$style.thStyle;
+	            var trStyle = _props4$style.trStyle;
 
 
 	            var tableClassNames = options.classNames ? options.classNames : {},
@@ -2126,9 +2153,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	                showNestedElement && showNestedElement[currentRowKey] && nestedElements && nestedElements.length ? nestedElements.map(function (element) {
 	                    // element.onChildRowSelect = this.onChildRowSelect.bind(null, tbodyData, element);
 	                    //Passing Required Parent Properties to its children
-	                    var _props4 = _this2.props;
-	                    var keyForRowSelect = _props4.keyForRowSelect;
-	                    var outputKey = _props4.outputKey;
+	                    var _props5 = _this2.props;
+	                    var keyForRowSelect = _props5.keyForRowSelect;
+	                    var outputKey = _props5.outputKey;
 
 	                    element.parentDetails = { data: tbodyData, properties: { keyForRowSelect: keyForRowSelect, outputKey: outputKey } };
 
@@ -2161,7 +2188,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	                noData = this.state.noData,
 	                async = this.props.async,
 	                sendDataToParent = this.props.paginated,
-	                objectKeys,
 	                keyData,
 	                outputData,
 	                requiredData,
@@ -2172,18 +2198,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	                outputData = data.map(function (data, index) {
 	                    return _this3.getRow("body", data, index);
 	                });
-	            } else if (data.length || Object.keys(data).length) {
-	                objectKeys = Object.keys(data);
+	            } else if (data.length) {
 	                finalPosition = this.state.initialPosition + this.state.pageSize;
-	                requiredData = objectKeys.slice(this.state.initialPosition, finalPosition);
+	                requiredData = data.slice(this.state.initialPosition, finalPosition);
 
 	                if (sendDataToParent) {
 	                    sendData = data.slice(this.state.initialPosition, finalPosition);
 	                    sendDataToParent(sendData);
 	                }
-	                outputData = requiredData.map(function (key, index) {
-	                    keyData = data[key];
-	                    keyData.rowKey = key;
+
+	                this.renderedRows = requiredData;
+	                outputData = requiredData.map(function (currentData, index) {
+	                    keyData = currentData;
+	                    keyData.rowKey = index;
 	                    return _this3.getRow("body", keyData, index);
 	                });
 	            } else if (noData) {
