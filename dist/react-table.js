@@ -1675,10 +1675,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	            } else {
 	                delete this.selectedRows[tbodyData[keyForRowSelect]];
 	            }
-	            onRowSelect && onRowSelect(parentDetails ? {
+	            onRowSelect && onRowSelect({
 	                parentDetails: parentDetails,
+	                selectAll: false,
 	                selectedRows: this.selectedRows
-	            } : this.selectedRows, false);
+	            });
 	            // onRowSelect && onRowSelect(this.selectedRows);
 	        }
 	    }, {
@@ -1689,10 +1690,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var parentDetails = _props2.parentDetails;
 
 
-	            onRowSelect && onRowSelect(parentDetails ? {
+	            onRowSelect && onRowSelect({
 	                parentDetails: parentDetails,
-	                selectedRows: {}
-	            } : {}, false);
+	                selectedRows: {},
+	                selectAll: false
+	            });
 	        }
 	    }, {
 	        key: 'onSelectAll',
@@ -1710,10 +1712,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	                });
 	            }
 
-	            onRowSelect && onRowSelect(parentDetails ? {
+	            onRowSelect && onRowSelect({
 	                parentDetails: parentDetails,
-	                selectedRows: allDataWithKeys
-	            } : allDataWithKeys, event.target.checked);
+	                selectedRows: allDataWithKeys,
+	                selectAll: event.target.checked
+	            });
 	        }
 	    }, {
 	        key: 'showColumns',

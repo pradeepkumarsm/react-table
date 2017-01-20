@@ -95,20 +95,22 @@ export default class Grid extends Component {
         } else {
             delete this.selectedRows[tbodyData[keyForRowSelect]];
         }
-        onRowSelect && onRowSelect(parentDetails ? {
-            parentDetails,
-            selectedRows: this.selectedRows
-        } : this.selectedRows, false);
+        onRowSelect && onRowSelect({
+          parentDetails,
+          selectAll: false,
+          selectedRows: this.selectedRows
+        });
         // onRowSelect && onRowSelect(this.selectedRows);
     }
 
     resetSelectedData(){
       const {onRowSelect, parentDetails} = this.props;
 
-      onRowSelect && onRowSelect(parentDetails ? {
+      onRowSelect && onRowSelect({
           parentDetails,
-          selectedRows: {}
-        } : {}, false);
+          selectedRows: {},
+          selectAll: false
+        });
     }
 
     onSelectAll(event){
@@ -121,10 +123,11 @@ export default class Grid extends Component {
             });
       }
 
-      onRowSelect && onRowSelect(parentDetails ? {
+      onRowSelect && onRowSelect({
           parentDetails,
-          selectedRows: allDataWithKeys
-        } : allDataWithKeys, event.target.checked);
+          selectedRows: allDataWithKeys,
+          selectAll: event.target.checked
+        });
 
     }
 

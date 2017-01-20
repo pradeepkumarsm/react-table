@@ -38,10 +38,10 @@ class Basic extends Component{
         debugger;
     }
 
-    onRowSelect(data, selectAll){
+    onRowSelect({selectedRows, selectAll}){
         debugger;
         this.setState({
-            defaultValue : data,
+            defaultValue : selectedRows,
             selectAll
         })
     }
